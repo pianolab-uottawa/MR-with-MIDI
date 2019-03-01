@@ -38,5 +38,52 @@
     "cross-env": "^5.2.0",
     "electron-builder": "^20.18.0",
     "version-bump-prompt": "^4.1.0"
+  },
+  "build": {
+    "appId": "com.your-domain",
+    "compression": "normal",
+    "productName": "Example",
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    },
+    "mac": {
+      "icon": "assets/icon.icns",
+      "type": "distribution",
+      "target": [
+        "pkg",
+        "dmg",
+        "mas"
+      ],
+      "publish": {
+        "provider": "s3",
+        "bucket": "example-releases",
+        "path": "releases"
+      },
+      "category": "public.app-category.news"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico",
+      "publish": {
+        "provider": "s3",
+        "bucket": "example-releases",
+        "path": "releases"
+      }
+    },
+    "linux": {
+      "icon": "assets/icon.png",
+      "target": [
+        "snap",
+        "AppImage"
+      ],
+      "description": "Example",
+      "category": "Network;Feed",
+      "publish": {
+        "provider": "s3",
+        "bucket": "example-releases",
+        "path": "releases"
+      }
+    }
   }
 }
