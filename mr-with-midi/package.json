@@ -4,7 +4,6 @@
   "private": false,
   "main": "public/electron.js",
   "keywords": [
-
     "React",
     "Electron"
   ],
@@ -38,7 +37,9 @@
     "concurrently": "^3.6.0",
     "cross-env": "^5.2.0",
     "electron-builder": "^20.18.0",
-    "version-bump-prompt": "^4.1.0"
+    "version-bump-prompt": "^4.1.0",
+    "wait-on": "^3.2.0",
+    "electron-devtools-installer": "^2.2.4"
   },
   "build": {
     "appId": "com.your-domain",
