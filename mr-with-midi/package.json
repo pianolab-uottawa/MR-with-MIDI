@@ -1,14 +1,23 @@
 {
   "name": "mr-with-midi",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "main": "public/electron.js",
+  "keywords": [
+    "React",
+    "Electron"
+  ],
   "dependencies": {
+    "electron-is-dev": "^0.3.0",
+    "electron-publisher-s3": "^20.17.2",
+    "react-dev-utils": "^7.0.3",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-scripts": "2.1.5"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "npm react-scripts start",
+    "start": "concurrently \"cross-env BROWSER=none npm react-scripts start\" \"wait-on http://localhost:3000 && electron .\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -23,6 +32,11 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "electron": "^4.0.6"
+    "electron": "^4.0.6",
+    "react-scripts": "2.1.5",
+    "concurrently": "^3.6.0",
+    "cross-env": "^5.2.0",
+    "electron-builder": "^20.18.0",
+    "version-bump-prompt": "^4.1.0"
   }
 }
