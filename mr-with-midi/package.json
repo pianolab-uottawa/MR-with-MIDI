@@ -4,6 +4,7 @@
   "private": false,
   "main": "public/electron.js",
   "keywords": [
+
     "React",
     "Electron"
   ],
@@ -16,11 +17,11 @@
     "react-scripts": "2.1.5"
   },
   "scripts": {
-    "dev": "npm react-scripts start",
-    "start": "concurrently \"cross-env BROWSER=none npm react-scripts start\" \"wait-on http://localhost:3000 && electron .\"",
+    "dev": "yarn react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "concurrently \"cross-env BROWSER=none yarn react-scripts start\" \"wait-on http://localhost:3000 && electron .\"",
+    "pack": "electron-builder --dir",
+    "dist": "npx build --x64 --macos --win --linux --c.extraMetadata.main=build/electron.js -p always"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -65,20 +66,6 @@
     "win": {
       "target": "nsis",
       "icon": "assets/icon.ico",
-      "publish": {
-        "provider": "s3",
-        "bucket": "example-releases",
-        "path": "releases"
-      }
-    },
-    "linux": {
-      "icon": "assets/icon.png",
-      "target": [
-        "snap",
-        "AppImage"
-      ],
-      "description": "Example",
-      "category": "Network;Feed",
       "publish": {
         "provider": "s3",
         "bucket": "example-releases",
