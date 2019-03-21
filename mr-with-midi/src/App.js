@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
 import './App.css';
-import HeaderNavButton from './button/button.js';
+import Header from './header/header.js';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isShow: true,
+        };
+    }
   render() {
     return (
       <div className="App">
-          <HeaderNavButton/>
+
+          {this.state.isShow ? <Header /> : null}
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>

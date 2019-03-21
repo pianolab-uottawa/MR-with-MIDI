@@ -9,6 +9,7 @@
   ],
   "dependencies": {
     "abcjs": "^5.6.7",
+    "bootstrap": "^4.3.1",
     "electron-is-dev": "^0.3.0",
     "electron-publisher-s3": "^20.17.2",
     "react": "^16.8.4",
