@@ -1,18 +1,25 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import HeaderNavButton from '../button/button.js';
+import MyButton from '../button/button.js';
+import {Button} from "reactstrap";
 
 
 export default class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.buttonColor = "primary";
-        this.buttonText = "button1textiofjaddgijosgdijsg";
+        this.buttonColorPrm = "primary";
+        this.buttonColorSnd = "secondary";
+        this.buttonTextA = "Button text1";
+        this.buttonTextB = "Button text2";
         this.state = { x: 0, y: 0 };
+
     }
     render() {
         return (
-            <HeaderNavButton />
+            <div>
+            <Button  color={this.buttonColorPrm}>{this.buttonTextA}</Button>{' '}
+             <Button  color={this.buttonColorSnd}>{this.buttonTextB}</Button>{' '}<MyButton buttonColor="primary"/>
+            </div>
         )
     }
 
