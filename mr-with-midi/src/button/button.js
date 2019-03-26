@@ -10,6 +10,6 @@ function MyButton(props){
     );
 }
 
-function vs const vs class
+
 
 export default MyButton;

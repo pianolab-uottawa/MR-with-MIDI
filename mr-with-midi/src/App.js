@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Header from './header/header.js';
+import Body from "./body/body";
 
 class App extends Component {
     constructor(props) {
@@ -15,9 +16,8 @@ class App extends Component {
       <div className="App">
 
           {this.state.isShow ? <Header /> : null}
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
+          {this.state.isShow ? <Body /> : null}
+
       </div>
     );
   }
