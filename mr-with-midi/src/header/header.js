@@ -2,7 +2,9 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MyButton from '../button/button.js';
 import {Button} from "reactstrap";
-import Body from "../body/body.js";
+
+import createScore1 from "../score/score-1.js";
+import createScore2 from "../score/score-2.js";
 
 
 export default class Header extends React.Component {
@@ -10,15 +12,15 @@ export default class Header extends React.Component {
         super(props);
         this.buttonColorPrm = "primary";
         this.buttonColorSnd = "secondary";
-        this.buttonTextA = "Button text1";
-        this.buttonTextB = "Button text2";
+        this.buttonScore1 = "Score 1";
+        this.buttonScore2 = "Score 2";
         this.state = { x: 0, y: 0 };
     }
     render() {
         return (
             <div>
-            <Button  color={this.buttonColorPrm} onClick={Body.createScore1}>{this.buttonTextA}</Button>{' '}
-             <Button  color={this.buttonColorSnd}>{this.buttonTextB}</Button>{' '}<MyButton buttonColor="primary"/>
+            <Button  color={this.buttonColorPrm} onClick={createScore1}>{this.buttonScore1}</Button>{' '}
+             <Button  color={this.buttonColorSnd} onClick={createScore2}>{this.buttonScore2}</Button>{' '}<MyButton buttonColor="primary"/>
             </div>
         )
     }
