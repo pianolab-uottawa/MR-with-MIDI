@@ -1,5 +1,22 @@
 import abcjs from "abcjs/midi"
 
+var abcParam = [[],[]];
+
+abcParam[0]["score"]=
+    "|:d2|EB{c}BA B2 EB|";
+abcParam[0]["imageSizeFactor"]=
+    "2.2";
+abcParam[0]["staffWidth"]=
+    "240";
+abcParam[0]["blankTime"]=
+    "3000";
+abcParam[0]["stayTime"]=
+    "2000";
+
+var scoreSessionObject = {
+    scoreSession: abcParam,
+};
+
 
 export default function createScore1(){
     let abcParam = "T: TEST\n" +

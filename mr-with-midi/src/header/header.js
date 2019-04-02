@@ -14,13 +14,19 @@ export default class Header extends React.Component {
         this.buttonColorSnd = "secondary";
         this.buttonScore1 = "Score 1";
         this.buttonScore2 = "Score 2";
+        this.handleKeyPress = (event) => {
+            if(event.key == '1'){
+                createScore2();
+            }
+        }
         this.state = { x: 0, y: 0 };
+
     }
     render() {
         return (
-            <div>
-            <Button  color={this.buttonColorPrm} onClick={createScore1}>{this.buttonScore1}</Button>{' '}
-             <Button  color={this.buttonColorSnd} onClick={createScore2}>{this.buttonScore2}</Button>{' '}<MyButton buttonColor="primary"/>
+            <div onKeyPress={this.handleKeyPress}>
+            <Button  color={this.buttonColorPrm} >{this.buttonScore1}</Button>{' '}
+             <Button  color={this.buttonColorSnd}>{this.buttonScore2}</Button>{' '}<MyButton buttonColor="primary"/>
             </div>
         )
     }
