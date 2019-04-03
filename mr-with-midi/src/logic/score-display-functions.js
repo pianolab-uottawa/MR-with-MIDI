@@ -1,75 +1,57 @@
 import abcjs from "abcjs/midi"
 
 
-export default function createScore(scoreSessionObject){
+export default function createScore(){
 
-    const defaultWidth = 300;
-    const defaultImageSizeFactor = 1.2;
+    const defaultWidth = "300";
+    const defaultImageSizeFactor = "1.2";
     const defaultEmptyStaffImage = "xx|";
     const defaultBlankTime = 1000;
-    const stayTime = 1000;
+    const defaultStayTime = 1000;
 
     let abcParam = [];
-    abcParam[0]["score"]=
-        "|:d2|EB{c}BA B2 EB|";
-    abcParam[0]["blankTime"]=
-        "3000";
-    abcParam[0]["stayTime"]=
-        "2000";
-    abcParam[0]["imageSizeFactor"]=
-        "2.2";
-    abcParam[0]["staffWidth"]=
-        "240";
 
+    abcParam[0]={score:"|:d2|EB{c}BA B2 EB|", blankTime:1000, stayTime:1000, imageSizeFactor:"3.2", staffWidth:"240"};
+    abcParam[1]={score:"|D2 a|", blankTime:500, stayTime:500, imageSizeFactor:"1.2", staffWidth:"440"};
+    abcParam[2]={score:"|:b2 C|", blankTime:3000, stayTime:3000, imageSizeFactor:"3.2", staffWidth:"340"};
 
-    abcParam[1] =
-        "|:D2 EB{c}B2 A|";
-    abcParam[2] =
-        "|:a|";
-    abcParam[3] =
-        "|:c|";
-    abcParam[4] =
-        "|:B|";
 
     //see https://configurator.abcjs.net/visual for configuration
 
-    var blankTime=1000;
-    var stayTime=1000;
-    var initialBlankTime = 1000;
 
-    setTimeout((function(){
-        for (let i=0; i<totalRounds; i++) {
+    let initialBlankTime = 1;
+    let totalRounds = 3;
+    let accumulatedTimeFactor = 0;
 
-            displayWithDelayBeforeScore(i,abcParam[i]["score"],abcParam[i]["blankTime"],abcparam[i]["stayTime"],abcParam[i]["imageSizeFactor"]);
-            removeScoreWithDelay();
+    function createScoreSequenceWithBlanks () {
+        setTimeout((function () {
+            for (let i = 0; i < totalRounds;(accumulatedTimeFactor+=abcParam[i]["blankTime"] + abcParam[i]["stayTime"]) && i++ ) {
 
-        }
+                setTimeout((function(n){
+                display(abcParam[i]["score"], abcParam[i]["imageSizeFactor"], abcParam[i]["staffWidth"]);
+                }).bind(null, i, accumulatedTimeFactor,abcParam[i]["blankTime"]), (accumulatedTimeFactor+abcParam[i]["blankTime"]));
 
+                setTimeout((function(m){
+                remove();
+                }).bind(null, i, accumulatedTimeFactor, abcParam[i]["stayTime"],abcParam[i]["blankTime"]), (accumulatedTimeFactor+abcParam[i]["stayTime"]+abcParam[i]["blankTime"]));
 
-    }), initialBlankTime);
+            }
+        }), initialBlankTime);
+    }
 
-    function displayWithDelayBeforeScore (index,score,blankTime,stayTime,imageSizeFactor,staffWidth) {
-
-
-            setTimeout((function(n){
+    function display (score,imageSizeFactor,staffWidth) {
                 console.log("show");
                 abcjs.renderAbc("score-action-bundle-section",score, {
                     scale: imageSizeFactor,
                     staffwidth: staffWidth,
                 });
-            }).bind(null, index), ((blankTime+stayTime)*(index)));
-
     }
 
-    function removeScoreWithDelay (index,blankTime,stayTime) {
-
-            setTimeout((function(m){
+    function remove() {
                 console.log("clear");
                 abcjs.renderAbc("score-action-bundle-section","");
-
-            }).bind(null, index), (blankTime+stayTime)*(index)+stayTime);
-
     }
 
 
+    createScoreSequenceWithBlanks();
 }
