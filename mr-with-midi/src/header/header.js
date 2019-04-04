@@ -2,8 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MyButton from '../button/button.js';
 import {Button} from "reactstrap";
-
-import createScore from "../logic/score-display-functions.js";
+import funcs from "../logic/score-display-functions.js";
 
 
 export default class Header extends React.Component {
@@ -14,9 +13,13 @@ export default class Header extends React.Component {
         this.buttonText1 = "Score 1";
         this.buttonText2 = "Score 2";
         this.handleKeyPress = (event) => {
-            if(event.key == '1'){
-                createScore()
+            if(event.key === '1'){
+                funcs.creater();
             }
+            if(event.key === 'r'){
+                funcs.resetter();
+            }
+
         }
         this.state = { x: 0, y: 0 };
 
