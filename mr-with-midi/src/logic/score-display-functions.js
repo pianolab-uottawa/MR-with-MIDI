@@ -11,8 +11,8 @@ export default function createScore(){
 
     let abcParam = [];
 
-    abcParam[0]={score:"|:d2|EB{c}BA B2 EB|", blankTime:1000, stayTime:1000, imageSizeFactor:"3.2", staffWidth:"240"};
-    abcParam[1]={score:"|D2 a|", blankTime:500, stayTime:500, imageSizeFactor:"1.2", staffWidth:"440"};
+    abcParam[0]={score:"|:d2|EB{c}BA B2 EB|", blankTime:1000, stayTime:3000, imageSizeFactor:"3.2", staffWidth:"240"};
+    abcParam[1]={score:"|D2 a|", blankTime:1500, stayTime:500, imageSizeFactor:"1.2", staffWidth:"440"};
     abcParam[2]={score:"|:b2 C|", blankTime:3000, stayTime:3000, imageSizeFactor:"3.2", staffWidth:"340"};
 
 
@@ -21,11 +21,22 @@ export default function createScore(){
 
     let initialBlankTime = 1;
     let totalRounds = 3;
-    let accumulatedTimeFactor = 0;
+
 
     function createScoreSequenceWithBlanks () {
-        setTimeout((function () {
-            for (let i = 0; i < totalRounds;(accumulatedTimeFactor+=abcParam[i]["blankTime"] + abcParam[i]["stayTime"]) && i++ ) {
+
+        setTimeout((function () { // this setTimeout here only created for "initial blank time" purpose.
+
+            for (let i = 0, accumulatedTimeFactor = 0; i < totalRounds; accumulatedTimeFactor+=abcParam[i]["blankTime"] + abcParam[i]["stayTime"], i++ ) {
+                //this is the main loop. The delay accumulates after each iteration, so when executing the loop the delay is unique to each iteration. I gotta say, This is using asynchronous to simulate synchronous....
+
+
+                /*(function(m,n){ //using IIFE within the for loop, just another way to do it.
+                    setTimeout(function(){
+                        display(abcParam[m]["score"], abcParam[m]["imageSizeFactor"], abcParam[m]["staffWidth"]);
+                    }, ( n+abcParam[m]["blankTime"]))
+                })(i,accumulatedTimeFactor,abcParam[i]["blankTime"]);*/
+
 
                 setTimeout((function(n){
                 display(abcParam[i]["score"], abcParam[i]["imageSizeFactor"], abcParam[i]["staffWidth"]);
