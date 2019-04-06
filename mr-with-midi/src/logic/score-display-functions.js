@@ -1,3 +1,8 @@
+//This is pure javascript way to write/export logic functions. But I will keep it here for reference/record.
+
+//https://stackoverflow.com/questions/37949981/call-child-method-from-parent
+//https://stackoverflow.com/questions/26176519/reactjs-call-parent-method
+
 import abcjs from "abcjs/midi"
 
 const defaultWidth = "300";
