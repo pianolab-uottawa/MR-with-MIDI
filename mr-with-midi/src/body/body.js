@@ -1,4 +1,5 @@
 import React from 'react';
+import CreateScoreWithBlanksLC from '../logic/CreateScoreWithBlanksLC.js'
 
 export default class Body extends React.Component {
 
@@ -8,7 +9,7 @@ export default class Body extends React.Component {
     }
    render(){
         return (
-            <div id="score-action-bundle-section">-</div>
+            <CreateScoreWithBlanksLC />
         );
     }
 
