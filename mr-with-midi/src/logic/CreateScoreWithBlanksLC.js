@@ -1,4 +1,5 @@
 //Logic Component
+//read score arrays and pass them onto child for display cycle.
 import React from "react";
 import DisplayLC from "./DisplayLC";
 import RemoveLC from "./RemoveLC";
@@ -10,32 +11,22 @@ class CreateScoreWithBlanksLC extends React.Component {
 
     constructor(props) {
         super(props);
+        this.singleRound = {score:"|", imageSizeFactor:"", staffWidth:""};
+
         this.abcParam = [];
-        abcParam[0]={score:"|:d2|EB{c}BA B2 EB|", blankTime:1000, stayTime:3000, imageSizeFactor:"3.2", staffWidth:"240"};
-        abcParam[1]={score:"|D2 a|", blankTime:1500, stayTime:500, imageSizeFactor:"1.2", staffWidth:"440"};
-        abcParam[2]={score:"|:b2 C|", blankTime:3000, stayTime:3000, imageSizeFactor:"3.2", staffWidth:"340"};
-        this.initialBlankTime = 1000;
+        this.abcParam[0]={score:"|:d2|EB{c}BA B2 EB|", stayTime:3000, imageSizeFactor:"3.2", staffWidth:"240"};
+        this.abcParam[1]={score:"|D2 a|",  stayTime:500, imageSizeFactor:"1.2", staffWidth:"440"};
+        this.abcParam[2]={score:"|:b2 C|", stayTime:3000, imageSizeFactor:"3.2", staffWidth:"340"};
         this.totalRounds = abcParam.length;
-        this.createScoreSequenceWithBlanks = (score,imageSizeFactor,staffWidth,blankTime,stayTime) => {
 
-            setTimeout((function(n){
-                display(score, imageSizeFactor, staffWidth);
-            }).bind(null, i, accumulatedTimeFactor,blankTime), (accumulatedTimeFactor+blankTime));
-
-            setTimeout((function(m){
-                remove();
-            }).bind(null, i, accumulatedTimeFactor, stayTime,blankTime), (accumulatedTimeFactor+stayTime+blankTime));
-
-        };
-
-
-
-
-        this.handleKeyDown = (event) =>{
+        this.handleKeyDown = () =>{
             if (event.key === '1') {
-                this.createScoreSequenceWithBlanks();
+                this.singleRound["score"] = this.abcParam[0]["score"];
+                this.singleRound["imageSizeFactor"] = this.abcParam[0][imageSizeFactor];
+                this.singleRound["staffWidth"]=this.abcParam[0][staffWidth];
             }
         }
+        this.loop = () => {setTimeout(this.remove(),this.props.stayTime);}//after the display time, just remove it.
     }
 
     componentDidMount() {
@@ -46,20 +37,15 @@ class CreateScoreWithBlanksLC extends React.Component {
     }
 
 
+
+
     render() {
         return (
-            <div>
+            <div id="bundle" onKeyDown={this.handleKeyDown()}>
                 <DisplayLC
-                    handleKeyDown={this.handleKeyDown}
-                    initialBlankTime={this.initialBlankTime}
-                    score={this.abcParam}
-                    blankTime={this.abcParam}
-                    stayTime={}
-                    imageSizeFactor={}
-                    staffWidth={}
-                />
-                <ResetLC
-                    onKeydown={this.resetter}
+                    score={this.singleRound["score"]}
+                    imageSizeFactor={this.singleRound["imageSizeFactor"]}
+                    staffWidth={this.singleRound["staffWidth"]}
                 />
             </div>
         );
