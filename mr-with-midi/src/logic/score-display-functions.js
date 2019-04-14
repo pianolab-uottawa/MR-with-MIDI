@@ -2,7 +2,7 @@
 //https://stackoverflow.com/questions/37949981/call-child-method-from-parent
 //https://stackoverflow.com/questions/26176519/reactjs-call-parent-method
 
-import abcjs from "abcjs/midi"
+//import abcjs from "abcjs/midi"
 
 const defaultWidth = "300";
 const defaultImageSizeFactor = "1.2";
@@ -58,5 +58,3 @@ const funcs = {
     creater() { createScoreSequenceWithBlanks(); },
     resetter() { reset(); }
 }
-
-export default funcs

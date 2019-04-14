@@ -5,7 +5,8 @@ class MyButton extends React.Component {
     render() {
         return (
             <span>
-                <Button color={props.buttonColor}>"button element"</Button>
+                <Button color={this.props.buttonColor}>"button element"</Button>
+
             </span>);
     }
 }

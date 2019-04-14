@@ -15,6 +15,7 @@ class App extends Component {
     return (
       <div className="App">
 
+
           {this.state.isShow ? <Header /> : null}
           {this.state.isShow ? <Body /> : null}
 

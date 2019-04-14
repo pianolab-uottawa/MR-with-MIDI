@@ -1,20 +1,14 @@
 //Logic Component
 
 import React from "react";
-import abcjs from "abcjs/midi";
+import abcjs from "abcjs";
 
-export default class DisplayLC extends React.component{
+class DisplayLC extends React.Component{
 
     constructor(props){
         super(props);
+        this.display = this.display.bind(this);
 
-        this.display = (score,imageSizeFactor,staffWidth) => {
-            console.log("show");
-            abcjs.renderAbc("score-action-bundle-section",score, {
-                scale: imageSizeFactor,
-                staffwidth: staffWidth,
-            });
-        };
 /*
         this.createScoreLoops = (score,imageSizeFactor,staffWidth,blankTime,stayTime) => {
 
@@ -32,10 +26,22 @@ export default class DisplayLC extends React.component{
 
     }
 
+    display = (score,imageSizeFactor,staffWidth) =>{
+        console.log(score+"-1");
+        alert(staffWidth);
+        setTimeout(function(){
+            abcjs.renderAbc("scoreLoopBundle",score, {
+                scale: imageSizeFactor,
+                staffwidth: staffWidth,
+            });
+        },1000)
+
+    };
+
     componentDidUpdate(prevProps) {
-        if(!equal(this.props.score, prevProps.score))
+        if((this.props.score !== prevProps.score))
         {
-            this.display(this.props.score,this.props.imageSizeFactor,this.props.staffwidth);//set what to display. you can display empty score as blanks.
+            this.display(this.props.score,this.props.imageSizeFactor,this.props.staffWidth);//set what to display. you can display empty score as blanks.
 
         }
     }
@@ -44,14 +50,13 @@ export default class DisplayLC extends React.component{
 
     render () {
         return (//note we need to set onkeydown as global event listener, because we need to change view anytime when user press key "1".
-            <div id="DisplayLC" >
-                <div id="score-action-bundle-section" >
-                </div>
-                <div id="reference">
-                    {this.props.score}-{this.stayTime}-{this.props.imageSizeFactor}-{this.props.staffwidth}
-                </div>
+
+            <div id="display" >
+                {this.display(this.props.score,this.props.imageSizeFactor,this.props.staffWidth)}
+                <div id="scoreLoopBundle"></div>
             </div>
         )
     }
 
 }
+export default DisplayLC;

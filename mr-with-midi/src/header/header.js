@@ -2,7 +2,6 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MyButton from '../button/button.js';
 import {Button} from "reactstrap";
-import CreateScoreWithBlanksLC from "../logic/CreateScoreWithBlanksLC";
 
 
 export default class Header extends React.Component {
@@ -21,7 +20,6 @@ export default class Header extends React.Component {
             <div>
             <Button  color={this.buttonColorPrm} >{this.buttonText1}</Button>{' '}
              <Button  color={this.buttonColorSnd}>{this.buttonText2}</Button>{' '}<MyButton buttonColor="primary"/>
-             <CreateScoreWithBlanksLC />
             </div>
         )
     }
