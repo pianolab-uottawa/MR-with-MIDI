@@ -9,13 +9,25 @@ class CreateScoreWithBlanksLC extends React.Component {
     constructor(props) {
         super(props);
         this.handleKeyDown = this.handleKeyDown.bind(this);
-        this.abcParam = intervalCPositionSolid;
+        this.scoreSetSwitcher = this.scoreSetSwitcher.bind(this);
+        this.abcParam = [];
         this.state={
           score: "",
           imageSizeFactor:"1",
           staffWidth: "100",
           stayTime: 1000,
         };
+    }
+
+    scoreSetSwitcher (scoreIDstripped) {
+        switch(scoreIDstripped) {
+            case intervalCPositionSolid[0]["scoreIDstripped"]:
+                this.abcParam = intervalCPositionSolid;
+                break;
+            case intervalCPositionBroken[0]["scoreIDstripped"]:
+                this.abcParam = intervalCPositionBroken;
+                break;
+        }
     }
 
     handleKeyDown(event){
@@ -51,7 +63,10 @@ class CreateScoreWithBlanksLC extends React.Component {
 
     render() {
         return (
+            <div>
+                {scoreSetSwitcher(this.props.scoreIDstripped)}
                 <DisplayLC score={this.state.score} imageSizeFactor={this.state.imageSizeFactor} staffWidth= {this.state.staffWidth}/>
+            </div>
         );
     }
 }

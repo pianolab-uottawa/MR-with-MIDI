@@ -9,8 +9,7 @@ export default class Body extends React.Component {
     }
    render(){
         return (
-            <CreateScoreWithBlanksLC />
-
+            <p>.</p>
         );
     }
 
