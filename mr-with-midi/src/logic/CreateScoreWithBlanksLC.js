@@ -2,15 +2,14 @@
 //read score arrays and pass them onto child for display cycle.
 import React from "react";
 import DisplayLC from "./DisplayLC";
-import {score1} from "../score/score-1";//important, note {} vs no{}, they are different
-
+import {intervalCPositionSolid, intervalCPositionBroken} from "../score/index";//important, note {} vs no{}, they are different
 
 class CreateScoreWithBlanksLC extends React.Component {
 
     constructor(props) {
         super(props);
         this.handleKeyDown = this.handleKeyDown.bind(this);
-        this.abcParam = score1;
+        this.abcParam = intervalCPositionSolid;
         this.state={
           score: "",
           imageSizeFactor:"1",
@@ -22,7 +21,7 @@ class CreateScoreWithBlanksLC extends React.Component {
     handleKeyDown(event){
         if (event.key === '1') {
             //for loop, setState, async///
-            for (let i=0,accum=0;i<this.abcParam.length;i++) {
+            for (let i=1,accum=0;i<this.abcParam.length+1;i++) {
 
                 setTimeout(()=>{//this changes score parameters (states). Child display component "DisplayLC" receives it as props
                     this.setState({

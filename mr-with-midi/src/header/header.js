@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import MyButton from '../button/button.js';
 import {Button} from "reactstrap";
+import {intervalCPositionSolid, intervalCPositionBroken} from "../score/index";
 
 
 export default class Header extends React.Component {
@@ -9,17 +9,18 @@ export default class Header extends React.Component {
         super(props);
         this.buttonColorPrm = "primary";
         this.buttonColorSnd = "secondary";
-        this.buttonText1 = "Score 1";
-        this.buttonText2 = "Score 2";
+        this.intCBr = intervalCPositionBroken[0]["scoreID"];
+        this.intCSo = intervalCPositionSolid[0]["scoreID"];
+        this.handleMouseDown = this.handleMouseDown.bind(this);
         this.state = { x: 0, y: 0 };
-
     }
+
     render() {
         return (
-
             <div>
-            <Button  color={this.buttonColorPrm} >{this.buttonText1}</Button>{' '}
-             <Button  color={this.buttonColorSnd}>{this.buttonText2}</Button>{' '}<MyButton buttonColor="primary"/>
+                <Button color={this.buttonColorPrm} id={this.intCBr}>{this.intCBr}</Button>
+                &nbsp;
+                <Button color={this.buttonColorPrm} id={this.intCSo}>{this.intCSo}</Button>
             </div>
         )
     }
