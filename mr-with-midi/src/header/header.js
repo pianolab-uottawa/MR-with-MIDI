@@ -16,7 +16,7 @@ export default class Header extends React.Component {
         };
     }
 
-    handleMouseDown (event){
+    handleMouseDown (event){//move this handler to CreateScoreWithBlanksLC!!!!!
         this.setState({
             scoreIDstripped: event.target.id,
         })
