@@ -2,7 +2,7 @@ var path = require('path');
 var scriptName = path.basename(__filename, '.js');
 //strip filename
 export const intervalCPositionBroken = [
-    {scoreID: scriptName, scoreIDstripped:""},
+    {scoreID: scriptName, scoreIDformatted:"xxx-score"},//add prefix to ensure the ID is unique in DOM
     {score:"", imageSizeFactor:"", staffWidth:"", stayTime:1000, ptKeyName:"1"},// assign 1,2,3,4 to ptKeyName....for practice / test round. For example, press key "1" for practice 1, press key "2" for practice 2, press "3" for actual test.
     {score:" G G G|", imageSizeFactor:"1.2", staffWidth:"60" , stayTime:3000, eventName: "Practice 1 shows on screen"},
     {score:"", imageSizeFactor:"", staffWidth:"" , stayTime:1000},
