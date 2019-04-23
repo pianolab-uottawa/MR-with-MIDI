@@ -10,34 +10,36 @@ export default class Header extends React.Component {
         super(props);
         this.buttonColorPrm = "primary";
         this.buttonColorSnd = "secondary";
+        this.state = {
+            scoreSet:[],
+            ptKeyName:"",
+            loopLocation:1,
+        };
     }
 
-    scoreSetSwitcher = (elementID) => {/*should actually move all handlers to header.js. right now we are loading scores twice in 2 different places */
+    scoreSetSwitcher = (elementID) => {
         switch(elementID) {
 
             case intervalCPositionSolid[0]["scoreIDformatted"]:
-                this.abcParam = intervalCPositionSolid;
+                this.setState({
+                    scoreSet:intervalCPositionSolid
+                });
                 break;
 
             case intervalCPositionBroken[0]["scoreIDformatted"]:
-                this.abcParam = intervalCPositionBroken;
+                this.setState({
+                    scoreSet:intervalCPositionBroken
+                });
                 break;
 
             case "button-reset":
-                let setTimeoutID = window.setTimeout(() => {}, 0);
-                while (setTimeoutID) {
-                    window.clearTimeout(setTimeoutID);
-                    setTimeoutID--;
-                }
-                this.abcParam = [];
                 this.setState({
-                    score: "",
-                    scoreIDformatted:"",
+                    scoreSet:[]
                 });
                 break;
 
             default:
-                this.abcParam = [];
+                break;
         }
 
     };
@@ -47,8 +49,10 @@ export default class Header extends React.Component {
     };
 
     handleKeyDown = (event) => {
-        if (event.key === '1') {
-
+        if (event.key === 'any of the key in scoreSet-ptKeyCode') {
+            this.setState({
+                ptKeyName: event.key
+            });
         }
     };
 
@@ -69,7 +73,7 @@ export default class Header extends React.Component {
                 </div>
 
                 <div>
-                    <CreateScoreWithBlanksLC scoreIDformatted={this.state.scoreIDformatted}/>
+                    <CreateScoreWithBlanksLC scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation}/>
                 </div>
             </div>
         )
