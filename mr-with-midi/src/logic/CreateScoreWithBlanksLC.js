@@ -7,12 +7,11 @@ class CreateScoreWithBlanksLC extends React.Component {
 
     constructor(props) {
         super(props);
-        this.abcParam = [];
         this.state={
             score: "",
             imageSizeFactor:"1",
             staffWidth: "1",
-            stayTime: 1,
+            eventDuration: 1,
             scoreIDformatted:"",
         };
     }
@@ -24,7 +23,6 @@ class CreateScoreWithBlanksLC extends React.Component {
             window.clearTimeout(setTimeoutID);
             setTimeoutID--;
         }
-        this.abcParam = [];
         this.setState({
             score: "",
             scoreIDformatted:"",
@@ -32,37 +30,36 @@ class CreateScoreWithBlanksLC extends React.Component {
 
     };
 
-    passScoreSet = (scoreSet) => {
-        this.clearAsyncFunctions();
-        this.abcParam = scoreSet;
-    };
+
+    loopScoreSets = (scoreSet, ptKeyName, loopLocation) => {
 
 
-    loopScoreSets = (ptKeyName) => {
-        for (let i=1,accum=0;i<this.abcParam.length+1 && !this.abcParam[i]["ptKeyName"];i++) {
+        for (let i=loopLocation,accum=0;i<scoreSet.length+1;i++) {
+
             setTimeout(()=>{//this changes score parameters (states). Child display component "DisplayLC" receives it as props
                 this.setState({
-                    score:this.abcParam[i]["score"],
-                    imageSizeFactor:this.abcParam[i]["imageSizeFactor"],
-                    staffWidth: this.abcParam[i]["staffWidth"]
+                    score:scoreSet[i]["score"],
+                    imageSizeFactor:scoreSet[i]["imageSizeFactor"],
+                    staffWidth:scoreSet[i]["staffWidth"]
                 });
 
-            },accum+0.001);
+            },accum+0.1);
 
-            setTimeout(()=>{//this removes the score after each staytime. we pass empty parameters to remove score.
+            setTimeout(()=>{//this removes the score after each eventDuration. we pass empty parameters to remove score.
                 this.setState({
                     score:"",
                     imageSizeFactor:"",
                     staffWidth:""
                 });
-            },accum+=this.abcParam[i]["stayTime"])
+            },accum+=scoreSet[i]["eventDuration"])
         }
     };
 
+
     render() {
+        this.loopScoreSets(this.props.scoreSet,this.props.ptKeyName, this.props.loopLocation);
         return (
             <div>
-                {this.passScoreSet(this.props.scoreSet)}
                 <DisplayLC score={this.state.score} imageSizeFactor={this.state.imageSizeFactor} staffWidth= {this.state.staffWidth}/>
             </div>
         );

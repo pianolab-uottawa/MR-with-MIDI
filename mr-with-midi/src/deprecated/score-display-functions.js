@@ -10,9 +10,9 @@ const defaultEmptyStaffImage = "xx|";
 const defaultBlankTime = 1000;
 const defaultStayTime = 1000;
 let abcParam = [];
-abcParam[0]={score:"|:d2|EB{c}BA B2 EB|", blankTime:1000, stayTime:3000, imageSizeFactor:"3.2", staffWidth:"240"};
-abcParam[1]={score:"|D2 a|", blankTime:1500, stayTime:500, imageSizeFactor:"1.2", staffWidth:"440"};
-abcParam[2]={score:"|:b2 C|", blankTime:3000, stayTime:3000, imageSizeFactor:"3.2", staffWidth:"340"};
+abcParam[0]={score:"|:d2|EB{c}BA B2 EB|", blankTime:1000, eventDuration:3000, imageSizeFactor:"3.2", staffWidth:"240"};
+abcParam[1]={score:"|D2 a|", blankTime:1500, eventDuration:500, imageSizeFactor:"1.2", staffWidth:"440"};
+abcParam[2]={score:"|:b2 C|", blankTime:3000, eventDuration:3000, imageSizeFactor:"3.2", staffWidth:"340"};
 //see https://configurator.abcjs.net/visual for configuration
 let initialBlankTime = 500;
 let totalRounds = 3;

@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button} from "reactstrap";
 import {intervalCPositionSolid, intervalCPositionBroken} from "../score/index";
-import CreateScoreWithBlanksLC from "../body/body";
+import CreateScoreWithBlanksLC from "../logic/CreateScoreWithBlanksLC";
 
 
 export default class Header extends React.Component {
@@ -10,10 +10,11 @@ export default class Header extends React.Component {
         super(props);
         this.buttonColorPrm = "primary";
         this.buttonColorSnd = "secondary";
+        this.scoreSetTemp = [];
         this.state = {
-            scoreSet:[],
             ptKeyName:"",
             loopLocation:1,
+            scoreSet:[],
         };
     }
 
@@ -21,21 +22,16 @@ export default class Header extends React.Component {
         switch(elementID) {
 
             case intervalCPositionSolid[0]["scoreIDformatted"]:
-                this.setState({
-                    scoreSet:intervalCPositionSolid
-                });
+                this.scoreSetTemp = intervalCPositionSolid;
                 break;
 
+
             case intervalCPositionBroken[0]["scoreIDformatted"]:
-                this.setState({
-                    scoreSet:intervalCPositionBroken
-                });
+                this.scoreSetTemp = intervalCPositionBroken;
                 break;
 
             case "button-reset":
-                this.setState({
-                    scoreSet:[]
-                });
+                this.scoreSetTemp = [];
                 break;
 
             default:
@@ -45,20 +41,21 @@ export default class Header extends React.Component {
     };
 
     handleMouseDown = (event) => {
-        scoreSetSwitcher(event.target.id);
+        this.scoreSetSwitcher(event.target.id);
     };
 
     handleKeyDown = (event) => {
-        if (event.key === 'any of the key in scoreSet-ptKeyCode') {
+        if (event.key === '1') {
             this.setState({
-                ptKeyName: event.key
+                ptKeyName: event.key,
+                scoreSet:this.scoreSetTemp
             });
         }
     };
 
     componentDidMount() {
         window.addEventListener('keydown', this.handleKeyDown);
-        window.addEventListener('mousedown', this.handleKeyDown);
+        window.addEventListener('mousedown', this.handleMouseDown);
     }
     componentWillUnmount() {
     }
