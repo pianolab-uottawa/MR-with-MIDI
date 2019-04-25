@@ -7,6 +7,7 @@ class CreateScoreWithBlanksLC extends React.Component {
 
     constructor(props) {
         super(props);
+        this.loopScoreSets = this.loopScoreSets.bind(this);
         this.state={
             score: "",
             imageSizeFactor:"1",
@@ -31,10 +32,12 @@ class CreateScoreWithBlanksLC extends React.Component {
     };
 
 
+
     loopScoreSets = (scoreSet, ptKeyName, loopLocation) => {
 
+        console.log(scoreSet[1]);
 
-        for (let i=loopLocation,accum=0;i<scoreSet.length+1;i++) {
+        for ( let i=loopLocation, accum=0 ; i<scoreSet.length ; i++) {
 
             setTimeout(()=>{//this changes score parameters (states). Child display component "DisplayLC" receives it as props
                 this.setState({
@@ -43,21 +46,29 @@ class CreateScoreWithBlanksLC extends React.Component {
                     staffWidth:scoreSet[i]["staffWidth"]
                 });
 
-            },accum+0.1);
+
+
+            },1000*i);
 
             setTimeout(()=>{//this removes the score after each eventDuration. we pass empty parameters to remove score.
-                this.setState({
+               /* this.setState({
                     score:"",
                     imageSizeFactor:"",
                     staffWidth:""
-                });
-            },accum+=scoreSet[i]["eventDuration"])
+                });*/
+            },2000);
+
         }
     };
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.props !== prevProps){
+            this.loopScoreSets(this.props.scoreSet,this.props.ptKeyName,this.props.loopLocation)
+        }
+    }
+
 
     render() {
-        this.loopScoreSets(this.props.scoreSet,this.props.ptKeyName, this.props.loopLocation);
         return (
             <div>
                 <DisplayLC score={this.state.score} imageSizeFactor={this.state.imageSizeFactor} staffWidth= {this.state.staffWidth}/>

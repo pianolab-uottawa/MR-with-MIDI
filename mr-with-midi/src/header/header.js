@@ -11,6 +11,7 @@ export default class Header extends React.Component {
         this.buttonColorPrm = "primary";
         this.buttonColorSnd = "secondary";
         this.scoreSetTemp = [];
+
         this.state = {
             ptKeyName:"",
             loopLocation:1,
@@ -71,6 +72,7 @@ export default class Header extends React.Component {
 
                 <div>
                     <CreateScoreWithBlanksLC scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation}/>
+                    {console.log("pass")}
                 </div>
             </div>
         )
