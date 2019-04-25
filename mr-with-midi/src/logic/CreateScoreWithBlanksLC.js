@@ -51,11 +51,11 @@ class CreateScoreWithBlanksLC extends React.Component {
             },accum);
 
             setTimeout(()=>{//this removes the score after each eventDuration. we pass empty parameters to remove score.
-               /* this.setState({
+               this.setState({
                     score:"",
                     imageSizeFactor:"",
                     staffWidth:""
-                });*/
+                });
             },accum+=scoreSet[i]["eventDuration"]);
 
         }
