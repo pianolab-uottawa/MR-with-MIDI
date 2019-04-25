@@ -35,7 +35,7 @@ class CreateScoreWithBlanksLC extends React.Component {
 
     loopScoreSets = (scoreSet, ptKeyName, loopLocation) => {
 
-        console.log(scoreSet[1]);
+        console.log("loop");
 
         for ( let i=loopLocation, accum=0 ; i<scoreSet.length ; i++) {
 
@@ -48,7 +48,7 @@ class CreateScoreWithBlanksLC extends React.Component {
 
 
 
-            },1000*i);
+            },accum);
 
             setTimeout(()=>{//this removes the score after each eventDuration. we pass empty parameters to remove score.
                /* this.setState({
@@ -56,7 +56,7 @@ class CreateScoreWithBlanksLC extends React.Component {
                     imageSizeFactor:"",
                     staffWidth:""
                 });*/
-            },2000);
+            },accum+=scoreSet[i]["eventDuration"]);
 
         }
     };
