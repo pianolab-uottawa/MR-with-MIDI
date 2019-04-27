@@ -30,15 +30,7 @@ function createScoreSequenceWithBlanks (score,imageSizeFactor,staffWidth,blankTi
 
 }
 
-function reset() {
-    console.log("reset");
-    remove();
-    let setTimeoutID = window.setTimeout(() => {}, 0);
-    while (setTimeoutID) {
-        window.clearTimeout(setTimeoutID);
-        setTimeoutID--;
-    }
-}
+
 
 function display (score,imageSizeFactor,staffWidth) {
     console.log("show");

@@ -11,6 +11,8 @@ export default class Header extends React.Component {
         this.buttonColorPrm = "primary";
         this.buttonColorSnd = "secondary";
         this.scoreSetTemp = [];
+        this.reset=false;
+        this.keyLock = false;
 
         this.state = {
             ptKeyName:"",
@@ -19,20 +21,31 @@ export default class Header extends React.Component {
         };
     }
 
+
+
     scoreSetSwitcher = (elementID) => {
+
         switch(elementID) {
 
             case intervalCPositionSolid[0]["scoreIDformatted"]:
+
+                this.reset=false;
                 this.scoreSetTemp = intervalCPositionSolid;
                 break;
 
-
             case intervalCPositionBroken[0]["scoreIDformatted"]:
+
+                this.reset=false;
                 this.scoreSetTemp = intervalCPositionBroken;
                 break;
 
-            case "button-reset":
-                this.scoreSetTemp = [];
+            case "resetCurrent":
+
+                this.reset=true;
+                this.setState({
+                    ptKeyName:"",
+                    scoreSet:[]
+                });
                 break;
 
             default:
@@ -41,22 +54,39 @@ export default class Header extends React.Component {
 
     };
 
+
     handleMouseDown = (event) => {
-        this.scoreSetSwitcher(event.target.id);
+            this.scoreSetSwitcher(event.target.id);
     };
 
     handleKeyDown = (event) => {
-        if (event.key === '1') {
-            this.setState({
-                ptKeyName: event.key,
-                scoreSet:this.scoreSetTemp
-            });
+        document.getElementById("scoreLoopBundle").style.display="block";
+
+        for (let i=0;i<this.scoreSetTemp.length;i++)
+        {
+            if ((this.scoreSetTemp[i]["ptKeyName"] === event.key) && (!this.keyLock)){
+                console.log("lock");
+                //lock up the keyboard for x secs, to prevent multiple press down
+                this.keyLock = true;
+                setTimeout(()=>{
+                    this.keyLock = false;
+                },3000);
+                //end of lock up
+                this.setState({
+                    ptKeyName: event.key,
+                    scoreSet:this.scoreSetTemp,
+                    loopLocation:i
+                });
+            }
+            else {
+                //console.log(this.keyLock)
+            }
+
         }
     };
 
     componentDidMount() {
-        window.addEventListener('keydown', this.handleKeyDown);
-        window.addEventListener('mousedown', this.handleMouseDown);
+        window.addEventListener('keydown', this.handleKeyDown);//global
     }
     componentWillUnmount() {
     }
@@ -65,13 +95,15 @@ export default class Header extends React.Component {
         return (
             <div>
                 <div>
-                    <Button color={this.buttonColorPrm} id={intervalCPositionBroken[0]["scoreIDformatted"]}>{intervalCPositionBroken[0]["scoreID"]}</Button>
+                    <Button color={this.buttonColorPrm} id={intervalCPositionBroken[0]["scoreIDformatted"]} onClick={this.handleMouseDown}>{intervalCPositionBroken[0]["scoreID"]}</Button>
                     &nbsp;
-                    <Button color={this.buttonColorPrm} id={intervalCPositionSolid[0]["scoreIDformatted"]}>{intervalCPositionSolid[0]["scoreID"]}</Button>
+                    <Button color={this.buttonColorPrm} id={intervalCPositionSolid[0]["scoreIDformatted"]} onClick={this.handleMouseDown}>{intervalCPositionSolid[0]["scoreID"]}</Button>
+                    &nbsp;
+                    <Button color={this.buttonColorSnd} id="resetCurrent" onClick={this.handleMouseDown}>Reset Current</Button>
                 </div>
 
                 <div>
-                    <CreateScoreWithBlanksLC scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation}/>
+                    <CreateScoreWithBlanksLC scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} reset={this.reset}/>
                     {console.log("pass")}
                 </div>
             </div>
