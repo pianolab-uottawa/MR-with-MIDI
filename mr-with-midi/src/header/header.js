@@ -3,13 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button} from "reactstrap";
 import {intervalCPositionSolid, intervalCPositionBroken} from "../score/index";
 import CreateScoreWithBlanksLC from "../logic/CreateScoreWithBlanksLC";
+import EventRecorder from "../logic/EventRecorder";
 
 
 export default class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.buttonColorPrm = "primary";
-        this.buttonColorSnd = "secondary";
         this.scoreSetTemp = [];
         this.reset=false;
         this.keyLock = false;
@@ -95,16 +94,17 @@ export default class Header extends React.Component {
         return (
             <div>
                 <div>
-                    <Button color={this.buttonColorPrm} id={intervalCPositionBroken[0]["scoreIDformatted"]} onClick={this.handleMouseDown}>{intervalCPositionBroken[0]["scoreID"]}</Button>
+                    <Button color="primary" id={intervalCPositionBroken[0]["scoreIDformatted"]} onClick={this.handleMouseDown}>{intervalCPositionBroken[0]["scoreID"]}</Button>
                     &nbsp;
-                    <Button color={this.buttonColorPrm} id={intervalCPositionSolid[0]["scoreIDformatted"]} onClick={this.handleMouseDown}>{intervalCPositionSolid[0]["scoreID"]}</Button>
+                    <Button color="primary" id={intervalCPositionSolid[0]["scoreIDformatted"]} onClick={this.handleMouseDown}>{intervalCPositionSolid[0]["scoreID"]}</Button>
                     &nbsp;
-                    <Button color={this.buttonColorSnd} id="resetCurrent" onClick={this.handleMouseDown}>Reset Current</Button>
+                    <Button color="secondary" id="resetCurrent" onClick={this.handleMouseDown}>Reset Current</Button>
                 </div>
 
                 <div>
                     <CreateScoreWithBlanksLC scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} reset={this.reset}/>
                     {console.log("pass")}
+                    <EventRecorder />
                 </div>
             </div>
         )

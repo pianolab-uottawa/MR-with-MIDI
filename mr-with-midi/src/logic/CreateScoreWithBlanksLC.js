@@ -36,8 +36,6 @@ class CreateScoreWithBlanksLC extends React.Component {
 
     loopScoreSets = (scoreSet, ptKeyName, loopLocation) => {
 
-
-
         for ( let i=loopLocation, accum=0, id=0 ; i<scoreSet.length ; i++) {
 
             this.timeoutID[id++]=setTimeout(()=>{//this changes score parameters (states). Child display component "DisplayLC" receives it as props
@@ -50,7 +48,7 @@ class CreateScoreWithBlanksLC extends React.Component {
             },accum);
 
 
-            this.timeoutID[id++]=setTimeout(()=>{//this removes the score after each eventDuration. we pass empty parameters to remove score.
+            this.timeoutID[id++]=setTimeout(()=>{//this empties the score display area after each eventDuration. we set empty parameters to do this.
                this.setState({
                     score:"",
                     imageSizeFactor:"",
@@ -58,8 +56,6 @@ class CreateScoreWithBlanksLC extends React.Component {
                 });
 
             },accum+=scoreSet[i]["eventDuration"]);
-
-
 
         }
     };
