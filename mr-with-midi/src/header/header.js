@@ -28,23 +28,21 @@ export default class Header extends React.Component {
 
             case intervalCPositionSolid[0]["scoreIDformatted"]:
 
-                this.reset=false;
                 this.scoreSetTemp = intervalCPositionSolid;
                 break;
 
             case intervalCPositionBroken[0]["scoreIDformatted"]:
 
-                this.reset=false;
                 this.scoreSetTemp = intervalCPositionBroken;
                 break;
 
             case "resetCurrent":
 
-                this.reset=true;
                 this.setState({
                     ptKeyName:"",
                     scoreSet:[]
                 });
+                this.reset=true;
                 break;
 
             default:
@@ -55,7 +53,8 @@ export default class Header extends React.Component {
 
 
     handleMouseDown = (event) => {
-            this.scoreSetSwitcher(event.target.id);
+        this.reset=false;
+        this.scoreSetSwitcher(event.target.id);
     };
 
     handleKeyDown = (event) => {
@@ -104,7 +103,7 @@ export default class Header extends React.Component {
                 <div>
                     <CreateScoreWithBlanksLC scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} reset={this.reset}/>
                     {console.log("pass")}
-                    <EventRecorder />
+                    <EventRecorder  scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation}/>
                 </div>
             </div>
         )
