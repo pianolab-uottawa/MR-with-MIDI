@@ -9,6 +9,7 @@ import EventRecorder from "../logic/EventRecorder";
 export default class Header extends React.Component {
     constructor(props) {
         super(props);
+        this.participantID = "";
         this.scoreSetTemp = [];
         this.reset=false;
         this.keyLock = false;
@@ -19,8 +20,6 @@ export default class Header extends React.Component {
             scoreSet:[],
         };
     }
-
-
 
     scoreSetSwitcher = (elementID) => {
 
@@ -34,6 +33,10 @@ export default class Header extends React.Component {
             case intervalCPositionBroken[0]["scoreIDformatted"]:
 
                 this.scoreSetTemp = intervalCPositionBroken;
+                break;
+
+            case "startNew":
+                this.participantID = prompt("Please enter participant ID", "");
                 break;
 
             case "resetCurrent":
@@ -58,17 +61,17 @@ export default class Header extends React.Component {
     };
 
     handleKeyDown = (event) => {
-        document.getElementById("scoreLoopBundle").style.display="block";
 
         for (let i=0;i<this.scoreSetTemp.length;i++)
         {
             if ((this.scoreSetTemp[i]["ptKeyName"] === event.key) && (!this.keyLock)){
                 console.log("lock");
+
                 //lock up the keyboard for x secs, to prevent multiple press down
                 this.keyLock = true;
                 setTimeout(()=>{
                     this.keyLock = false;
-                },3000);
+                },3500);
                 //end of lock up
                 this.setState({
                     ptKeyName: event.key,
@@ -79,6 +82,7 @@ export default class Header extends React.Component {
             else {
                 //console.log(this.keyLock)
             }
+
 
         }
     };
@@ -93,6 +97,8 @@ export default class Header extends React.Component {
         return (
             <div>
                 <div>
+                    <Button color="success" id="startNew" onClick={this.handleMouseDown}>Start New</Button>
+                    &nbsp;
                     <Button color="primary" id={intervalCPositionBroken[0]["scoreIDformatted"]} onClick={this.handleMouseDown}>{intervalCPositionBroken[0]["scoreID"]}</Button>
                     &nbsp;
                     <Button color="primary" id={intervalCPositionSolid[0]["scoreIDformatted"]} onClick={this.handleMouseDown}>{intervalCPositionSolid[0]["scoreID"]}</Button>
@@ -103,7 +109,7 @@ export default class Header extends React.Component {
                 <div>
                     <CreateScoreWithBlanksLC scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} reset={this.reset}/>
                     {console.log("pass")}
-                    <EventRecorder  scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation}/>
+                    <EventRecorder  participantID={this.participantID} scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} reset={this.reset}/>
                 </div>
             </div>
         )
