@@ -3,7 +3,10 @@ import React from 'react';
 export default class EventRecorder extends React.Component {
     constructor(props) {
         super(props);
-        this.eventRecordsCSV = [];
+        this.csvData = [
+            ['Event ID and name: ' ,'Behavior Name: ','Played Note: ','Velocity: ','Time(ms): ','Date: ','Participant ID','Test name','Notes shown on screen','Played notes','Case number','If case 2 - how many additional notes','if case 1 or case 2 - completion time','if case 1 or case 2 - initial response time'],
+            []
+        ];
         this.timeoutID = [];
         this.playedNote = "";
         this.eventID=0;
@@ -20,7 +23,6 @@ export default class EventRecorder extends React.Component {
         this.notes.map((currElement, index) => {
             this.noteMap[index+24] = currElement;
         });
-
 
 
 
@@ -42,14 +44,30 @@ export default class EventRecorder extends React.Component {
         for ( let i=loopLocation, accum=0, id=0 ; i<scoreSet.length ; i++) {
 
             this.timeoutID[id++]=setTimeout(()=>{
-                this.eventRecordsCSV.push([scoreSet[i]["eventName"],scoreSet[i]["score"],participantID,performance.now().toString()]);
+                this.csvData.push([scoreSet[i]["eventName"],scoreSet[i]["score"],participantID,performance.now().toString()]);
                 console.log(this.eventRecordsCSV);
             },accum+=scoreSet[i]["eventDuration"]);
         }
     };
 
-    appendMIDIData = (midiEvent) => {
-        
+    appendMIDIData = (event) => {
+
+        if (event.data.length === 3 && (event.data[0] === (145)||event.data[0] === (144)) && (event.data[2] !== 0)) {
+
+
+            let pNoteIndex = event.data[1];
+            this.playedNote = this.noteMap[pNoteIndex];
+
+            let row = [eventID, event.data[0], playedNote, event.data[2], performance.now(), Date()];
+            this.csvData.push(row);
+
+            playedNotesArray[eventID] += playedNote;
+            playTimes[eventID].push(ms);
+
+
+
+        }
+
 
     };
 

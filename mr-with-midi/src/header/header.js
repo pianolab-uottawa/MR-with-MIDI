@@ -46,6 +46,16 @@ export default class Header extends React.Component {
 
     };
 
+    setParticipantID = () => {
+        let tempID = prompt("Please enter participant ID", "");
+        if (tempID === null || tempID === "") {
+            this.participantID = "Administor did not enter participant ID.";
+        } else {
+            this.participantID = tempID;
+        }
+
+    };
+
     scoreSetSwitcher = (elementID) => {
 
         switch(elementID) {
@@ -61,7 +71,8 @@ export default class Header extends React.Component {
                 break;
 
             case "startNew":
-                this.participantID = prompt("Please enter participant ID", "");
+
+                this.setParticipantID();
                 break;
 
             case "resetCurrent":
