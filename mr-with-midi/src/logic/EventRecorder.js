@@ -6,7 +6,6 @@ export default class EventRecorder extends React.Component {
         this.eventRecordsCSV = [];
         this.timeoutID = [];
         this.playedNote = "";
-        this.midi = 0;
         this.eventID=0;
 
         this.notes= ["C1", "C1#", "D1", "D1#", "E1", "F1", "F1#", "G1", "G1#", "A1", "A1#", "B1",
@@ -21,6 +20,8 @@ export default class EventRecorder extends React.Component {
         this.notes.map((currElement, index) => {
             this.noteMap[index+24] = currElement;
         });
+
+
 
 
     }
@@ -47,6 +48,21 @@ export default class EventRecorder extends React.Component {
         }
     };
 
+    appendMIDIData = (midiEvent) => {
+        
+
+    };
+
+    recordData = (participantID, scoreSet, ptKeyName, loopLocation, midiEvent) => {
+        if (!midiEvent) {
+            this.appendScoreSetData(participantID,scoreSet,ptKeyName,loopLocation);
+        }
+        else {
+            this.appendMIDIData (midiEvent);
+        }
+
+    };
+
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(this.props !== prevProps ) { //we have to add condition here, to prevent infinity loop
             if (this.props.reset === true) { //reset
@@ -54,7 +70,7 @@ export default class EventRecorder extends React.Component {
                 this.clearEventRecordData();
                 this.clearAsyncFunctions();
             } else { //record
-                this.appendScoreSetData(this.props.participantID, this.props.scoreSet, this.props.ptKeyName, this.props.loopLocation)
+                this.recordData(this.props.participantID, this.props.scoreSet, this.props.ptKeyName, this.props.loopLocation, this.props.midiEvent)
             }
         }
     }

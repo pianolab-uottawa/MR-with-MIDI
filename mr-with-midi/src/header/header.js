@@ -13,13 +13,38 @@ export default class Header extends React.Component {
         this.scoreSetTemp = [];
         this.reset=false;
         this.keyLock = false;
+        this.midi = 0;
+        this.initMIDIAccess();
 
         this.state = {
             ptKeyName:"",
             loopLocation:1,
             scoreSet:[],
+            midiEvent:0,
         };
     }
+
+
+
+    initMIDIAccess = () => {
+        navigator.requestMIDIAccess().then(this.onSuccess, this.onFailure); //get midi access
+    };
+
+    onSuccess = (access) => {
+        this.midi = access;
+        let inputs = this.midi.inputs;
+
+        //connect to first device found
+        if (inputs.size > 0) {
+            let iterator = inputs.values(); // returns an iterator that loops over all inputs
+            let input = iterator.next().value; // get the first input
+            input.onmidimessage = this.handleMIDIMessage;
+        }
+    };
+
+    onFailure = (err) => {
+
+    };
 
     scoreSetSwitcher = (elementID) => {
 
@@ -54,6 +79,12 @@ export default class Header extends React.Component {
 
     };
 
+    handleMIDIMessage = (event) => {
+        this.setState({
+            midiEvent:event,
+        })
+    };
+
 
     handleMouseDown = (event) => {
         this.reset=false;
@@ -76,7 +107,8 @@ export default class Header extends React.Component {
                 this.setState({
                     ptKeyName: event.key,
                     scoreSet:this.scoreSetTemp,
-                    loopLocation:i
+                    loopLocation:i,
+                    midiEvent:0
                 });
             }
             else {
@@ -109,7 +141,7 @@ export default class Header extends React.Component {
                 <div>
                     <CreateScoreWithBlanksLC scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} reset={this.reset}/>
                     {console.log("pass")}
-                    <EventRecorder  participantID={this.participantID} scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} reset={this.reset}/>
+                    <EventRecorder  participantID={this.participantID} scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} reset={this.reset} midiEvent={this.state.midiEvent}/>
                 </div>
             </div>
         )
