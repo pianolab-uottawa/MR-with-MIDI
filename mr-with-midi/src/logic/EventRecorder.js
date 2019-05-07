@@ -58,11 +58,11 @@ export default class EventRecorder extends React.Component {
             let pNoteIndex = event.data[1];
             this.playedNote = this.noteMap[pNoteIndex];
 
-            let row = [eventID, event.data[0], playedNote, event.data[2], performance.now(), Date()];
-            this.csvData.push(row);
+           // let row = [eventID, event.data[0], playedNote, event.data[2], performance.now(), Date()];
+          //  this.csvData.push(row);
 
-            playedNotesArray[eventID] += playedNote;
-            playTimes[eventID].push(ms);
+          //  playedNotesArray[eventID] += playedNote;
+          //  playTimes[eventID].push(ms);
 
 
 
@@ -77,6 +77,7 @@ export default class EventRecorder extends React.Component {
         }
         else {
             this.appendMIDIData (midiEvent);
+            console.log(midiEvent)
         }
 
     };

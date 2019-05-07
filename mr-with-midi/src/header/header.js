@@ -150,7 +150,7 @@ export default class Header extends React.Component {
                 </div>
 
                 <div>
-                    <CreateScoreWithBlanksLC scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} reset={this.reset}/>
+                    <CreateScoreWithBlanksLC scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} reset={this.reset}  midiEvent={this.state.midiEvent}/>
                     {console.log("pass")}
                     <EventRecorder  participantID={this.participantID} scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} reset={this.reset} midiEvent={this.state.midiEvent}/>
                 </div>

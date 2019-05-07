@@ -73,6 +73,10 @@ class CreateScoreWithBlanksLC extends React.Component {
                 console.log("catch");
                 this.clearAsyncFunctions();
             }
+            else if (this.props.midiEvent !== 0){
+                //do nothing. It's used to prevent this component re-render itself on parent midiEvent state change
+                console.log("midi, no rerendering")
+            }
             else {
                 this.loopScoreSets(this.props.scoreSet,this.props.ptKeyName,this.props.loopLocation)
             }
