@@ -13,7 +13,7 @@ export default class EventRecorder extends React.Component {
         this.timeoutID = [];
         this.eventID=0;
         this.playTimes=[];
-        this.playedNotesArray=[];
+        this.playedNotesArray=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],];
 
         this.notes= ["C1=", "C1#", "D1=", "D1#", "E1=", "F1=", "F1#", "G1=", "G1#", "A1=", "A1#", "B1=",
             "C2=", "C2#", "D2=", "D2#", "E2=", "F2=", "F2#", "G2=", "G2#", "A2=", "A2#", "B2=",
@@ -46,13 +46,13 @@ export default class EventRecorder extends React.Component {
         for ( let i=loopLocation, accum=0, id=0 ; i<loopLength ; i++) {
 
             this.timeoutID[id++]=setTimeout(()=>{
-
+                this.eventID = scoreSet[i]["eventID"];
                 this.csvData.push([scoreSet[i]["eventName"],scoreSet[i]["score"],"","",participantID,performance.now().toString(),Date(),participantID,scoreSet[0]["scoreID"]]);
 
                 if (scoreSet[i]["score"] !== "") { // calculate after each cycle
                     setTimeout(()=>{
                         this.csvData.push(utilFunctions.calculate(this.eventID,this.playTimes,this.playedNotesArray,scoreSet[0]["noteGroupFormatVariant"],participantID,scoreSet[0]["scoreID"]))
-                    },scoreSet[i]("eventDuration"));
+                    },scoreSet[i]["eventDuration"]);
                 }
 
                 if (scoreSet[i+1]===undefined){ // if this is the end of score bundle, save csv.
@@ -70,11 +70,11 @@ export default class EventRecorder extends React.Component {
 
             let pNoteIndex = event.data[1];
             let playedNote = this.noteMap[pNoteIndex];
-            let row = ["Play", event.data[0], playedNote, event.data[2], performance.now(), Date()];
+            let row = ["Play", event.data[0], playedNote, event.data[2], performance.now().toString(), Date()];
             this.csvData.push(row);
 
-          //  playedNotesArray[eventID] += playedNote;
-          //  playTimes[eventID].push(ms);
+            this.playedNotesArray[this.eventID] += playedNote;
+            this.playTimes[this.eventID].push(performance.now());
 
         }
 
