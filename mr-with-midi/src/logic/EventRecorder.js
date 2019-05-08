@@ -1,4 +1,5 @@
 import React from 'react';
+import * as utilFunctions from './utilFunctions';
 
 export default class EventRecorder extends React.Component {
 
@@ -49,9 +50,9 @@ export default class EventRecorder extends React.Component {
                 this.csvData.push([scoreSet[i]["eventName"],scoreSet[i]["score"],"","",participantID,performance.now().toString(),Date(),participantID,scoreSet[0]["scoreID"]]);
 
                 if (scoreSet[i]["score"] !== "") { // calculate after each cycle
-
-                    //setTimeOut
-                    this.csvData.push(utilFunctions.calculate(this.eventID,this.playTimes,this.playedNotesArray,scoreSet[0]["noteGroupFormatVariant"],participantID,scoreSet[0]["scoreID"]))
+                    setTimeout(()=>{
+                        this.csvData.push(utilFunctions.calculate(this.eventID,this.playTimes,this.playedNotesArray,scoreSet[0]["noteGroupFormatVariant"],participantID,scoreSet[0]["scoreID"]))
+                    },scoreSet[i]("eventDuration"));
                 }
 
                 if (scoreSet[i+1]===undefined){ // if this is the end of score bundle, save csv.
@@ -77,10 +78,6 @@ export default class EventRecorder extends React.Component {
           //  playTimes[eventID].push(ms);
 
         }
-
-    };
-
-    appendCalculationResult = () =>{
 
     };
 

@@ -1,4 +1,4 @@
-saveCSV =(csvData, participantID, scoreID) => {
+const saveCSV =(csvData, participantID, scoreID) => {
 
     let csvContent = "data:text/csv;charset=utf-8,";
 
@@ -17,7 +17,7 @@ saveCSV =(csvData, participantID, scoreID) => {
 };
 
 
-calculate =(eventID,playTimes,playedNotesArray,noteGroupFormatVariant,participantID,scoreID)=> {
+const calculate =(eventID,playTimes,playedNotesArray,noteGroupFormatVariant,participantID,scoreID)=> {
 
     let compTime = '';
     let iniTime = '';
@@ -48,4 +48,4 @@ calculate =(eventID,playTimes,playedNotesArray,noteGroupFormatVariant,participan
 
 };
 
-
+export {saveCSV,calculate}
