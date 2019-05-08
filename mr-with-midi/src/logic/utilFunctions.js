@@ -44,7 +44,7 @@ calculate =(eventID,playTimes,playedNotesArray,noteGroupFormatVariant)=> {
     else
     {caseNumber = 'please check manually'}
 
-    return [eventID + 'Calculation','Calculate the result of previous trial','','','','',txt,'Note playing test treble C',patternNotesInGBroken[eventID],playedNotesArray[eventID],caseNumber,case2additional,compTime,iniTime];
+    return [eventID + 'Calculation','Calculate the result of previous trial','','','','',participantID,scoreSet[0]["scoreID"],noteGroupFormatVariant[eventID],playedNotesArray[eventID],caseNumber,case2additional,compTime,iniTime];
 
 };
 

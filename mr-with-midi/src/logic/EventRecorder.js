@@ -46,7 +46,7 @@ export default class EventRecorder extends React.Component {
 
             this.timeoutID[id++]=setTimeout(()=>{
 
-                this.csvData.push([scoreSet[i]["eventName"],scoreSet[i]["score"],participantID,performance.now().toString()]);
+                this.csvData.push([scoreSet[i]["eventName"],scoreSet[i]["score"],"","",participantID,performance.now().toString(),Date(),participantID,scoreSet[0]["scoreID"]]);
 
                 if (scoreSet[i]["score"] !== "") { // calculate after each cycle
 
