@@ -19,6 +19,7 @@ export default class Header extends React.Component {
         this.state = {
             ptKeyName:"",
             loopLocation:1,
+            loopLength:1,
             scoreSet:[],
             midiEvent:0,
         };
@@ -107,7 +108,14 @@ export default class Header extends React.Component {
         for (let i=0;i<this.scoreSetTemp.length;i++)
         {
             if ((this.scoreSetTemp[i]["ptKeyName"] === event.key) && (!this.keyLock)){
+
                 console.log("lock");
+
+                let loopLength = (() => {
+                    for (let j=i+1;j<this.scoreSetTemp.length;j++){
+                        if (this.scoreSetTemp[j]["ptKeyName"] || this.scoreSetTemp[i]["score"]===undefined ) {return j-i}
+                    }
+                })();
 
                 //lock up the keyboard for x secs, to prevent multiple press down
                 this.keyLock = true;
@@ -119,6 +127,7 @@ export default class Header extends React.Component {
                     ptKeyName: event.key,
                     scoreSet:this.scoreSetTemp,
                     loopLocation:i,
+                    loopLength:loopLength,
                     midiEvent:0
                 });
             }
@@ -150,9 +159,9 @@ export default class Header extends React.Component {
                 </div>
 
                 <div>
-                    <CreateScoreWithBlanksLC scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} reset={this.reset}  midiEvent={this.state.midiEvent}/>
+                    <CreateScoreWithBlanksLC scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} loopLength={this.state.loopLength} reset={this.reset}  midiEvent={this.state.midiEvent}/>
+                    <EventRecorder  participantID={this.participantID} scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} loopLength={this.state.loopLength} reset={this.reset} midiEvent={this.state.midiEvent}/>
                     {console.log("pass")}
-                    <EventRecorder  participantID={this.participantID} scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} reset={this.reset} midiEvent={this.state.midiEvent}/>
                 </div>
             </div>
         )

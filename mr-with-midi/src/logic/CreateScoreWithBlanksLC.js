@@ -33,9 +33,9 @@ class CreateScoreWithBlanksLC extends React.Component {
     };
 
 
-    loopScoreSets = (scoreSet, ptKeyName, loopLocation) => {
+    loopScoreSets = (scoreSet, ptKeyName, loopLocation, loopLength) => {
 
-        for ( let i=loopLocation, accum=0, id=0 ; i<scoreSet.length ; i++) {
+        for ( let i=loopLocation, accum=0, id=0 ; i<loopLength ; i++) {
 
             this.timeoutID[id++]=setTimeout(()=>{//this changes score parameters (states). Child display component "DisplayLC" receives it as props
                 this.setState({
@@ -70,10 +70,10 @@ class CreateScoreWithBlanksLC extends React.Component {
             }
             else if (this.props.midiEvent !== 0){
                 //do nothing. It's used to prevent this component re-render itself on parent midiEvent state change
-                console.log("midi, no rerendering")
+                console.log("midi, no re-rendering")
             }
             else {
-                this.loopScoreSets(this.props.scoreSet,this.props.ptKeyName,this.props.loopLocation)
+                this.loopScoreSets(this.props.scoreSet,this.props.ptKeyName,this.props.loopLocation,this.props.loopLength)
             }
 
         }

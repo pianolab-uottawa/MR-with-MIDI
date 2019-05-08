@@ -5,7 +5,7 @@ export const intervalCPositionBroken = [
     {score:"", imageSizeFactor:"", staffWidth:"" , eventDuration:1000, eventName: "blank screen"},
     {score:"G d G|", imageSizeFactor:"1.2", staffWidth:"60",  eventDuration:500, eventName: "Practice 2 shows on screen", eventID:0},
     {score:"", imageSizeFactor:"", staffWidth:"", eventDuration:1000, eventName: "blank screen"},
-    {score:"|G E G|", imageSizeFactor:"1.2", staffWidth:"60", eventDuration:3000, eventName:"Practice 3 shows on screen", eventID:0},
+    {score:"|G E G|", imageSizeFactor:"1.2", staffWidth:"60", eventDuration:3000, eventName:"Practice 3 shows on screen", eventID:0 },
     {score:"", imageSizeFactor:"", staffWidth:"", eventDuration:1000, eventName: "blank screen", ptKeyName:"2"},
     {score:"|C C C|", imageSizeFactor:"1.2", staffWidth:"60", eventDuration:3000, eventName:"Test-1", eventID:1},
     {score:"", imageSizeFactor:"", staffWidth:"", eventDuration:1000, eventName: "blank screen"},
