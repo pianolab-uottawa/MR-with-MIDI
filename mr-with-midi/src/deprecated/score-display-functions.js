@@ -30,8 +30,6 @@ function createScoreSequenceWithBlanks (score,imageSizeFactor,staffWidth,blankTi
 
 }
 
-
-
 function display (score,imageSizeFactor,staffWidth) {
     console.log("show");
     abcjs.renderAbc("score-action-bundle-section",score, {

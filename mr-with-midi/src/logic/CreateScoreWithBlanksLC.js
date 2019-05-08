@@ -10,8 +10,6 @@ class CreateScoreWithBlanksLC extends React.Component {
         this.loopScoreSets = this.loopScoreSets.bind(this);
         this.timeoutID = [];
 
-
-
         this.state={
             score: "",
             imageSizeFactor:"1",
@@ -19,9 +17,7 @@ class CreateScoreWithBlanksLC extends React.Component {
             eventDuration: 1,
             scoreIDformatted:"",
         };
-
     }
-
 
     clearAsyncFunctions= () =>{
         let index = this.timeoutID.length;
@@ -35,7 +31,6 @@ class CreateScoreWithBlanksLC extends React.Component {
         });
 
     };
-
 
 
     loopScoreSets = (scoreSet, ptKeyName, loopLocation) => {
