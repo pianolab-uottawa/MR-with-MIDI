@@ -17,7 +17,7 @@ saveCSV =(csvData, participantID, scoreID) => {
 };
 
 
-calculate =(eventID,playTimes,playedNotesArray,noteGroupFormatVariant)=> {
+calculate =(eventID,playTimes,playedNotesArray,noteGroupFormatVariant,participantID,scoreID)=> {
 
     let compTime = '';
     let iniTime = '';
@@ -44,9 +44,8 @@ calculate =(eventID,playTimes,playedNotesArray,noteGroupFormatVariant)=> {
     else
     {caseNumber = 'please check manually'}
 
-    return [eventID + 'Calculation','Calculate the result of previous trial','','','','',participantID,scoreSet[0]["scoreID"],noteGroupFormatVariant[eventID],playedNotesArray[eventID],caseNumber,case2additional,compTime,iniTime];
+    return [eventID + 'Calculation','Calculate the result of previous trial','','','','',scoreID,noteGroupFormatVariant[eventID],playedNotesArray[eventID],caseNumber,case2additional,compTime,iniTime];
 
 };
-
 
 

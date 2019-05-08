@@ -51,7 +51,7 @@ export default class EventRecorder extends React.Component {
                 if (scoreSet[i]["score"] !== "") { // calculate after each cycle
 
                     //setTimeOut
-                    this.csvData.push(utilFunctions.calculate(this.eventID,this.playTimes,this.playedNotesArray,scoreSet[0]["noteGroupFormatVariant"]))
+                    this.csvData.push(utilFunctions.calculate(this.eventID,this.playTimes,this.playedNotesArray,scoreSet[0]["noteGroupFormatVariant"],participantID,scoreSet[0]["scoreID"]))
                 }
 
                 if (scoreSet[i+1]===undefined){ // if this is the end of score bundle, save csv.
