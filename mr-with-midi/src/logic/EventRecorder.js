@@ -45,13 +45,17 @@ export default class EventRecorder extends React.Component {
         for ( let i=loopLocation, accum=0, id=0 ; i<scoreSet.length ; i++) {
 
             this.timeoutID[id++]=setTimeout(()=>{
+
                 this.csvData.push([scoreSet[i]["eventName"],scoreSet[i]["score"],participantID,performance.now().toString()]);
-                if
 
-                console.log(this.csvData);
+                if (scoreSet[i]["score"] !== "") { // calculate after each cycle
 
-                if (scoreSet[i+1]===undefined){
-                    saveCSV(this.csvData,this.props.participantID,scoreSet[0]["scoreID"]);
+                    //setTimeOut
+                    this.csvData.push(utilFunctions.calculate(this.eventID,this.playTimes,this.playedNotesArray,scoreSet[0]["noteGroupFormatVariant"]))
+                }
+
+                if (scoreSet[i+1]===undefined){ // if this is the end of score bundle, save csv.
+                    utilFunctions.saveCSV(this.csvData,this.props.participantID,scoreSet[0]["scoreID"]);
                 }
 
 
@@ -66,7 +70,7 @@ export default class EventRecorder extends React.Component {
 
             let pNoteIndex = event.data[1];
             let playedNote = this.noteMap[pNoteIndex];
-            let row = [++this.eventID, event.data[0], playedNote, event.data[2], performance.now(), Date()];
+            let row = ["Play", event.data[0], playedNote, event.data[2], performance.now(), Date()];
             this.csvData.push(row);
 
           //  playedNotesArray[eventID] += playedNote;

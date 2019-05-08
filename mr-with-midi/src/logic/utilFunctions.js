@@ -17,7 +17,7 @@ saveCSV =(csvData, participantID, scoreID) => {
 };
 
 
-calculation =(eventID,playTimes,playedNotesArray,noteGroupFormatVariant)=> {
+calculate =(eventID,playTimes,playedNotesArray,noteGroupFormatVariant)=> {
 
     let compTime = '';
     let iniTime = '';
