@@ -10,7 +10,7 @@ const saveCSV =(csvData, participantID, scoreID) => {
     //window.open(encodedUri);
 
     let dl=document.createElement('a');
-    dl.download=participantID + scoreID;
+    dl.download=participantID +'-'+ scoreID;
     dl.href=encodedUri;
     dl.click();
 
@@ -48,4 +48,9 @@ const calculate =(eventID,playTimes,playedNotesArray,noteGroupFormatVariant,part
 
 };
 
-export {saveCSV,calculate}
+const csvConstant = [
+    ['Event ID and name: ' ,'Behavior Name: ','Played Note: ','Velocity: ','Time(ms): ','Date: ','Participant ID','Test name','Notes shown on screen','Played notes','Case number','If case 2 - how many additional notes','if case 1 or case 2 - completion time','if case 1 or case 2 - initial response time'],
+    []
+];
+
+export {saveCSV,calculate, csvConstant}

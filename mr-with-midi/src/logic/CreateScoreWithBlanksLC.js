@@ -35,7 +35,12 @@ class CreateScoreWithBlanksLC extends React.Component {
 
     loopScoreSets = (scoreSet, ptKeyName, loopLocation, loopLength) => {
 
-        for ( let i=loopLocation, accum=0, id=0 ; i<loopLength ; i++) {
+
+        let location = parseInt(loopLocation);
+        let length = parseInt(loopLength);
+
+
+        for ( let i=location, accum=0, id=0; i< location+length; i++) {
 
             this.timeoutID[id++]=setTimeout(()=>{//this changes score parameters (states). Child display component "DisplayLC" receives it as props
                 this.setState({
@@ -43,7 +48,7 @@ class CreateScoreWithBlanksLC extends React.Component {
                     imageSizeFactor:scoreSet[i]["imageSizeFactor"],
                     staffWidth:scoreSet[i]["staffWidth"]
                 });
-                console.log(this.timeoutID)
+
             },accum);
 
 
@@ -55,9 +60,13 @@ class CreateScoreWithBlanksLC extends React.Component {
                 });
 
             },accum+=scoreSet[i]["eventDuration"]);
-
         }
     };
+
+    shouldComponentUpdate(nextProps) {
+
+        return (this.props.participantID === nextProps.participantID);
+    }
 
 
     /* The component receives props from header and re-renders itself. As a result componentDidUpdate gets triggered every time the component receives props, regardless of what's inside the props.
@@ -73,6 +82,7 @@ class CreateScoreWithBlanksLC extends React.Component {
                 console.log("midi, no re-rendering")
             }
             else {
+
                 this.loopScoreSets(this.props.scoreSet,this.props.ptKeyName,this.props.loopLocation,this.props.loopLength)
             }
 

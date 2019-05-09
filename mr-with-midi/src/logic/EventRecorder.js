@@ -5,11 +5,8 @@ export default class EventRecorder extends React.Component {
 
     constructor(props) {
         super(props);
-        this.initialCsvData = [
-            ['Event ID and name: ' ,'Behavior Name: ','Played Note: ','Velocity: ','Time(ms): ','Date: ','Participant ID','Test name','Notes shown on screen','Played notes','Case number','If case 2 - how many additional notes','if case 1 or case 2 - completion time','if case 1 or case 2 - initial response time'],
-            []
-        ];
-        this.csvData = this.initialCsvData;
+
+        this.csvData = utilFunctions.csvConstant;
         this.timeoutID = [];
         this.eventID=0;
         this.playTimes=[];
@@ -37,15 +34,18 @@ export default class EventRecorder extends React.Component {
         }
     };
 
-    clearEventRecordData=()=>{
-        this.csvData= this.initialCsvData;
-    };
 
     appendScoreSetData = (participantID, scoreSet, ptKeyName, loopLocation, loopLength) => {
 
-        for ( let i=loopLocation, accum=0, id=0 ; i<loopLength ; i++) {
+        let location = parseInt(loopLocation);
+        let length = parseInt(loopLength);
+
+        for ( let i=location, accum=0, id=0; i< location+length; i++) {
+
+
 
             this.timeoutID[id++]=setTimeout(()=>{
+
                 this.eventID = scoreSet[i]["eventID"];
                 this.csvData.push([scoreSet[i]["eventName"],scoreSet[i]["score"],"","",participantID,performance.now().toString(),Date(),participantID,scoreSet[0]["scoreID"]]);
 
@@ -55,8 +55,16 @@ export default class EventRecorder extends React.Component {
                     },scoreSet[i]["eventDuration"]);
                 }
 
-                if (scoreSet[i+1]===undefined){ // if this is the end of score bundle, save csv.
-                    utilFunctions.saveCSV(this.csvData,this.props.participantID,scoreSet[0]["scoreID"]);
+                if (scoreSet[i+1]["score"]===-1){ // if this is the end of score bundle, save csv.
+
+                    setTimeout(()=>{
+                        utilFunctions.saveCSV(this.csvData,this.props.participantID,scoreSet[0]["scoreID"]);
+
+                        return null;
+                    },3500);
+
+
+
                 }
 
             },accum+=scoreSet[i]["eventDuration"]);
@@ -91,12 +99,15 @@ export default class EventRecorder extends React.Component {
 
     };
 
+    shouldComponentUpdate(nextProps) {
+        return (this.props.participantID === nextProps.participantID);
+    }
+
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(this.props !== prevProps ) { //we have to add condition here, to prevent infinity loop
             if (this.props.reset === true) { //reset
-                console.log("catch2");
-                this.clearEventRecordData();
+                console.log("clea true");
                 this.clearAsyncFunctions();
             } else { //record
                 this.recordData(this.props.participantID, this.props.scoreSet, this.props.ptKeyName, this.props.loopLocation, this.props.loopLength, this.props.midiEvent)

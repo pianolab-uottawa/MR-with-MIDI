@@ -9,7 +9,17 @@ import EventRecorder from "../logic/EventRecorder";
 export default class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.participantID = "";
+
+        this.participantID = (() => {
+            let tempID = prompt("Please enter participant ID", "");
+            if (tempID === null || tempID === "") {
+                return "Administor did not enter participant ID.";
+            } else {
+                return tempID;
+            }
+
+        })();
+
         this.scoreSetTemp = [];
         this.reset=false;
         this.keyLock = false;
@@ -18,10 +28,11 @@ export default class Header extends React.Component {
 
         this.state = {
             ptKeyName:"",
-            loopLocation:1,
-            loopLength:1,
+            loopLocation:0,
+            loopLength:0,
             scoreSet:[],
             midiEvent:0,
+            displayID:this.participantID
         };
     }
 
@@ -47,17 +58,25 @@ export default class Header extends React.Component {
 
     };
 
-    setParticipantID = () => {
+    setParticipantID2 = () => {
         let tempID = prompt("Please enter participant ID", "");
         if (tempID === null || tempID === "") {
             this.participantID = "Administor did not enter participant ID.";
         } else {
             this.participantID = tempID;
+            this.setState({
+                displayID:tempID,
+            });
         }
 
     };
 
     scoreSetSwitcher = (elementID) => {
+        this.setState({
+            ptKeyName:"",
+            scoreSet:[]
+        });
+        this.reset=true;
 
         switch(elementID) {
 
@@ -72,8 +91,9 @@ export default class Header extends React.Component {
                 break;
 
             case "startNew":
+                window.location.reload();
 
-                this.setParticipantID();
+
                 break;
 
             case "resetCurrent":
@@ -99,12 +119,12 @@ export default class Header extends React.Component {
 
 
     handleMouseDown = (event) => {
-        this.reset=false;
+
         this.scoreSetSwitcher(event.target.id);
     };
 
     handleKeyDown = (event) => {
-
+        this.reset=false;
         for (let i=0;i<this.scoreSetTemp.length;i++)
         {
             if ((this.scoreSetTemp[i]["ptKeyName"] === event.key) && (!this.keyLock)){
@@ -112,10 +132,11 @@ export default class Header extends React.Component {
                 console.log("lock");
 
                 let loopLength = (() => {
-                    for (let j=i+1;j<this.scoreSetTemp.length;j++){
-                        if (this.scoreSetTemp[j]["ptKeyName"] || this.scoreSetTemp[i]["score"]===undefined ) {return j-i}
+                    for (let j=i+1;j<this.scoreSetTemp.length+1;j++){
+                        if (this.scoreSetTemp[j]["eventID"]=== -99 ) {return j-i}
                     }
                 })();
+
 
                 //lock up the keyboard for x secs, to prevent multiple press down
                 this.keyLock = true;
@@ -126,8 +147,8 @@ export default class Header extends React.Component {
                 this.setState({
                     ptKeyName: event.key,
                     scoreSet:this.scoreSetTemp,
-                    loopLocation:i,
-                    loopLength:loopLength,
+                    loopLocation:i.toFixed(),
+                    loopLength:loopLength.toFixed(),
                     midiEvent:0
                 });
             }
@@ -149,7 +170,7 @@ export default class Header extends React.Component {
         return (
             <div>
                 <div>
-                    <Button color="success" id="startNew" onClick={this.handleMouseDown}>Start New</Button>
+                    <Button color="success" id="startNew" onClick={this.handleMouseDown}>New Participant</Button>
                     &nbsp;
                     <Button color="primary" id={intervalCPositionBroken[0]["scoreIDformatted"]} onClick={this.handleMouseDown}>{intervalCPositionBroken[0]["scoreID"]}</Button>
                     &nbsp;
@@ -158,8 +179,10 @@ export default class Header extends React.Component {
                     <Button color="secondary" id="resetCurrent" onClick={this.handleMouseDown}>Reset Current</Button>
                 </div>
 
+                <div>Current Participant: {this.state.displayID}</div>
+
                 <div>
-                    <CreateScoreWithBlanksLC scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} loopLength={this.state.loopLength} reset={this.reset}  midiEvent={this.state.midiEvent}/>
+                    <CreateScoreWithBlanksLC participantID={this.participantID} scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} loopLength={this.state.loopLength} reset={this.reset}  midiEvent={this.state.midiEvent}/>
                     <EventRecorder  participantID={this.participantID} scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} loopLength={this.state.loopLength} reset={this.reset} midiEvent={this.state.midiEvent}/>
                     {console.log("pass")}
                 </div>
