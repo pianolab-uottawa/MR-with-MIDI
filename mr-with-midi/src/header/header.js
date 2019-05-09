@@ -4,22 +4,14 @@ import {Button} from "reactstrap";
 import {intervalCPositionSolid, intervalCPositionBroken} from "../score/index";
 import CreateScoreWithBlanksLC from "../logic/CreateScoreWithBlanksLC";
 import EventRecorder from "../logic/EventRecorder";
-
+//https://stackoverflow.com/questions/36683770/how-to-get-the-value-of-an-input-field-using-reactjs
 
 export default class Header extends React.Component {
+
+
     constructor(props) {
         super(props);
-
-        this.participantID = (() => {
-            let tempID = prompt("Please enter participant ID", "");
-            if (tempID === null || tempID === "") {
-                return "Administor did not enter participant ID.";
-            } else {
-                return tempID;
-            }
-
-        })();
-
+        this.participantID = "";
         this.scoreSetTemp = [];
         this.reset=false;
         this.keyLock = false;
@@ -32,7 +24,8 @@ export default class Header extends React.Component {
             loopLength:0,
             scoreSet:[],
             midiEvent:0,
-            displayID:this.participantID
+            displayID:this.participantID,
+            inputValue: ''
         };
     }
 
@@ -58,18 +51,6 @@ export default class Header extends React.Component {
 
     };
 
-    setParticipantID2 = () => {
-        let tempID = prompt("Please enter participant ID", "");
-        if (tempID === null || tempID === "") {
-            this.participantID = "Administor did not enter participant ID.";
-        } else {
-            this.participantID = tempID;
-            this.setState({
-                displayID:tempID,
-            });
-        }
-
-    };
 
     scoreSetSwitcher = (elementID) => {
         this.setState({
@@ -160,6 +141,16 @@ export default class Header extends React.Component {
         }
     };
 
+    updateInputValue(evt) {
+        this.setState({
+            inputValue: evt.target.value
+        });
+    }
+    handleSubmit(event) {
+        alert('A name was submitted: ' + this.state.value);
+        event.preventDefault();
+    }
+
     componentDidMount() {
         window.addEventListener('keydown', this.handleKeyDown);//global
     }
@@ -179,7 +170,16 @@ export default class Header extends React.Component {
                     <Button color="secondary" id="resetCurrent" onClick={this.handleMouseDown}>Reset Current</Button>
                 </div>
 
-                <div>Current Participant: {this.state.displayID}</div>
+                <div>Current Participant: {this.state.inputValue}</div>
+
+                <form onSubmit={this.handleSubmit}>
+                    <label>
+                        Name:
+                        <input type="text" value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)} />
+                    </label>
+                    <input type="submit" value="Submit" />
+                </form>
+
 
                 <div>
                     <CreateScoreWithBlanksLC participantID={this.participantID} scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} loopLength={this.state.loopLength} reset={this.reset}  midiEvent={this.state.midiEvent}/>
