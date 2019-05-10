@@ -14,6 +14,8 @@ class DisplayLC extends React.Component{
             abcjs.renderAbc("scoreLoopBundle",score, {
                 scale: imageSizeFactor,
                 staffwidth: staffWidth,
+
+
             });
     };
 

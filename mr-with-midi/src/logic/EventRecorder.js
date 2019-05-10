@@ -6,7 +6,7 @@ export default class EventRecorder extends React.Component {
     constructor(props) {
         super(props);
 
-        this.csvData = utilFunctions.csvConstant;
+
         this.timeoutID = [];
         this.eventID=0;
         this.playTimes=[];
@@ -24,6 +24,12 @@ export default class EventRecorder extends React.Component {
         this.notes.map((currElement, index) => {
             this.noteMap[index+24] = currElement;
         });
+        this.state={
+            csvData:[
+                ['Event ID and name: ' ,'Behavior Name: ','Played Note: ','Velocity: ','Time(ms): ','Date: ','Participant ID','Test name','Notes shown on screen','Played notes','Case number','If case 2 - how many additional notes','if case 1 or case 2 - completion time','if case 1 or case 2 - initial response time'],
+                []
+            ]
+        };
 
     }
 
@@ -32,6 +38,16 @@ export default class EventRecorder extends React.Component {
         while (index--) {
             window.clearTimeout(this.timeoutID[index]);
         }
+    };
+
+    clearCSV =() => {
+
+        this.setState({
+            csvData:[
+                ['Event ID and name: ' ,'Behavior Name: ','Played Note: ','Velocity: ','Time(ms): ','Date: ','Participant ID','Test name','Notes shown on screen','Played notes','Case number','If case 2 - how many additional notes','if case 1 or case 2 - completion time','if case 1 or case 2 - initial response time'],
+                []
+            ]
+        });
     };
 
 
@@ -47,21 +63,31 @@ export default class EventRecorder extends React.Component {
             this.timeoutID[id++]=setTimeout(()=>{
 
                 this.eventID = scoreSet[i]["eventID"];
-                this.csvData.push([scoreSet[i]["eventName"],scoreSet[i]["score"],"",participantID,performance.now().toString(),Date(),participantID,scoreSet[0]["scoreID"]]);
+
+                let tempArr= this.state.csvData;
+                tempArr.push([scoreSet[i]["eventName"],scoreSet[i]["score"],"",participantID,performance.now().toString(),Date(),participantID,scoreSet[0]["scoreID"]]);
+                this.setState({//update state that depends on previous state
+                    csvData:tempArr,
+                });
 
                 if (scoreSet[i]["score"] !== "") { // calculate after each cycle
+                    let tempArr2= this.state.csvData;
+                    tempArr2.push(utilFunctions.calculate(this.eventID,this.playTimes,this.playedNotesArray,scoreSet[0]["noteGroupFormatVariant"],participantID,scoreSet[0]["scoreID"]));
                     setTimeout(()=>{
-                        this.csvData.push(utilFunctions.calculate(this.eventID,this.playTimes,this.playedNotesArray,scoreSet[0]["noteGroupFormatVariant"],participantID,scoreSet[0]["scoreID"]))
+                        this.setState({
+                            csvData:tempArr2,
+                        })
                     },scoreSet[i]["eventDuration"]);
                 }
 
                 if (scoreSet[i+1]["score"]===-1){ // if this is the end of score bundle, save csv.
+                    console.log(this.state.csvData);
 
                     setTimeout(()=>{
-                        utilFunctions.saveCSV(this.csvData,this.props.participantID,scoreSet[0]["scoreID"]);
+                        utilFunctions.saveCSV(this.state.csvData,this.props.participantID,scoreSet[0]["scoreID"]);
 
                         return null;
-                    },3500);
+                    },500);
 
 
 
@@ -79,7 +105,11 @@ export default class EventRecorder extends React.Component {
             let pNoteIndex = event.data[1];
             let playedNote = this.noteMap[pNoteIndex];
             let row = ["Play", event.data[0], playedNote, event.data[2], performance.now().toString(), Date()];
-            this.csvData.push(row);
+            let tempArr3 = this.state.csvData;
+            tempArr3.push(row);
+            this.setState({
+                csvData:tempArr3
+            });
 
             this.playedNotesArray[this.eventID] += playedNote;
             this.playTimes[this.eventID].push(performance.now());
@@ -109,6 +139,7 @@ export default class EventRecorder extends React.Component {
             if (this.props.reset === true) { //reset
                 console.log("clea true");
                 this.clearAsyncFunctions();
+                this.clearCSV();
             } else { //record
                 this.recordData(this.props.participantID, this.props.scoreSet, this.props.ptKeyName, this.props.loopLocation, this.props.loopLength, this.props.midiEvent)
             }

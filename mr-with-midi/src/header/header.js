@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button} from "reactstrap";
-import {intervalCPositionSolid, intervalCPositionBroken} from "../score/index";
+import {singleNoteCPosition, singleNoteGPosition, intervalCPositionSolid, intervalCPositionBroken} from "../score/index";
 import CreateScoreWithBlanksLC from "../logic/CreateScoreWithBlanksLC";
 import EventRecorder from "../logic/EventRecorder";
 //https://stackoverflow.com/questions/36683770/how-to-get-the-value-of-an-input-field-using-reactjs
@@ -61,9 +61,14 @@ export default class Header extends React.Component {
 
         switch(elementID) {
 
-            case intervalCPositionSolid[0]["scoreIDformatted"]:
+            case singleNoteCPosition[0]["scoreIDformatted"]:
 
-                this.scoreSetTemp = intervalCPositionSolid;
+                this.scoreSetTemp = singleNoteCPosition;
+                break;
+
+            case singleNoteGPosition[0]["scoreIDformatted"]:
+
+                this.scoreSetTemp = singleNoteGPosition;
                 break;
 
             case intervalCPositionBroken[0]["scoreIDformatted"]:
@@ -165,7 +170,9 @@ export default class Header extends React.Component {
                     &nbsp;
                     <Button color="primary" id={intervalCPositionBroken[0]["scoreIDformatted"]} onClick={this.handleMouseDown}>{intervalCPositionBroken[0]["scoreID"]}</Button>
                     &nbsp;
-                    <Button color="primary" id={intervalCPositionSolid[0]["scoreIDformatted"]} onClick={this.handleMouseDown}>{intervalCPositionSolid[0]["scoreID"]}</Button>
+                    <Button color="primary" id={singleNoteCPosition[0]["scoreIDformatted"]} onClick={this.handleMouseDown}>{singleNoteCPosition[0]["scoreID"]}</Button>
+                    &nbsp;
+                    <Button color="primary" id={singleNoteGPosition[0]["scoreIDformatted"]} onClick={this.handleMouseDown}>{singleNoteGPosition[0]["scoreID"]}</Button>
                     &nbsp;
                     <Button color="secondary" id="resetCurrent" onClick={this.handleMouseDown}>Reset Current</Button>
                 </div>
