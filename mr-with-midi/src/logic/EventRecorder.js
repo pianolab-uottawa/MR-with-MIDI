@@ -9,7 +9,7 @@ export default class EventRecorder extends React.Component {
 
         this.timeoutID = [];
         this.eventID=0;
-        this.playTimes=[];
+        this.playTimes=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]];
         this.playedNotesArray=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],];
 
         this.notes= ["C1=", "C1#", "D1=", "D1#", "E1=", "F1=", "F1#", "G1=", "G1#", "A1=", "A1#", "B1=",
@@ -62,36 +62,35 @@ export default class EventRecorder extends React.Component {
 
             this.timeoutID[id++]=setTimeout(()=>{
 
-                this.eventID = scoreSet[i]["eventID"];
 
+
+                if (scoreSet[i]["score"] !== "") { // calculate after each cycle
+                    setTimeout(()=>{
+                        let tempArr2= this.state.csvData;
+
+                        tempArr2.push(utilFunctions.calculate(this.eventID-1,this.playTimes,this.playedNotesArray,scoreSet[0]["noteGroupFormatVariant"],participantID,scoreSet[0]["scoreID"]));
+                        this.setState({
+                            csvData:tempArr2,
+                        })
+                    },scoreSet[i+1]["eventDuration"]);
+                }
+
+                this.eventID = scoreSet[i]["eventID"];
+                this.playTimes[this.eventID][0] = performance.now();
                 let tempArr= this.state.csvData;
-                tempArr.push([scoreSet[i]["eventName"],scoreSet[i]["score"],"",participantID,performance.now().toString(),Date(),participantID,scoreSet[0]["scoreID"]]);
+                tempArr.push([scoreSet[i]["eventName"],scoreSet[i]["score"],"",,performance.now().toString(),Date(),participantID,scoreSet[0]["scoreID"]]);
                 this.setState({//update state that depends on previous state
                     csvData:tempArr,
                 });
 
-                if (scoreSet[i]["score"] !== "") { // calculate after each cycle
-                    let tempArr2= this.state.csvData;
-                    tempArr2.push(utilFunctions.calculate(this.eventID,this.playTimes,this.playedNotesArray,scoreSet[0]["noteGroupFormatVariant"],participantID,scoreSet[0]["scoreID"]));
-                    setTimeout(()=>{
-                        this.setState({
-                            csvData:tempArr2,
-                        })
-                    },scoreSet[i]["eventDuration"]);
-                }
-
                 if (scoreSet[i+1]["score"]===-1){ // if this is the end of score bundle, save csv.
-                    console.log(this.state.csvData);
-
                     setTimeout(()=>{
                         utilFunctions.saveCSV(this.state.csvData,this.props.participantID,scoreSet[0]["scoreID"]);
-
                         return null;
                     },500);
-
-
-
                 }
+
+
 
             },accum+=scoreSet[i]["eventDuration"]);
         }
@@ -112,7 +111,11 @@ export default class EventRecorder extends React.Component {
             });
 
             this.playedNotesArray[this.eventID] += playedNote;
-            this.playTimes[this.eventID].push(performance.now());
+
+            let tempArr4 = this.playTimes[this.eventID];
+            tempArr4.push(performance.now());
+            this.playTimes[this.eventID]=tempArr4
+
 
         }
 

@@ -1,5 +1,5 @@
 export const singleNoteGPosition = [
-    {scoreID: "singleNoteGPosition", scoreIDformatted:"singleNoteGPosition",noteGroupFormatVariant:["practice-G4=A4=G4=","F4=","D4=","G4=","E4=","C4=","G4=","D4=","F4="]},//add prefix to ensure the ID is unique in DOM
+    {scoreID: "singleNoteGPosition", scoreIDformatted:"singleNoteGPosition",noteGroupFormatVariant:["practice-G4=A4=G4=","B4=","G4=","C5=","A4=","C5=","G4=","D5=","B4="]},//add prefix to ensure the ID is unique in DOM
 
     {score:"", imageSizeFactor:"", staffWidth:"", eventDuration:2000, eventName: "blank screen", ptKeyName:"1", eventID:0},// assign keys on keyboard to ptKeyName for practice / test round. For example, press key "1" for practice 1, press key "2" for practice 2, press "t" for actual test.
     {score:"y1/2G2", imageSizeFactor:"1.6", staffWidth:"110" , eventDuration:1000, eventName: "Practice 1 shows on screen", eventID:0},

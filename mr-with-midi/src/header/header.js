@@ -11,7 +11,6 @@ export default class Header extends React.Component {
 
     constructor(props) {
         super(props);
-        this.participantID = "";
         this.scoreSetTemp = [];
         this.reset=false;
         this.keyLock = false;
@@ -24,7 +23,7 @@ export default class Header extends React.Component {
             loopLength:0,
             scoreSet:[],
             midiEvent:0,
-            displayID:this.participantID,
+            participantID:'',
             inputValue: ''
         };
     }
@@ -148,7 +147,8 @@ export default class Header extends React.Component {
 
     updateInputValue(evt) {
         this.setState({
-            inputValue: evt.target.value
+            inputValue: evt.target.value,
+            participantID:evt.target.value
         });
     }
     handleSubmit(event) {
@@ -189,8 +189,8 @@ export default class Header extends React.Component {
 
 
                 <div>
-                    <CreateScoreWithBlanksLC participantID={this.participantID} scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} loopLength={this.state.loopLength} reset={this.reset}  midiEvent={this.state.midiEvent}/>
-                    <EventRecorder  participantID={this.participantID} scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} loopLength={this.state.loopLength} reset={this.reset} midiEvent={this.state.midiEvent}/>
+                    <CreateScoreWithBlanksLC participantID={this.state.participantID} scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} loopLength={this.state.loopLength} reset={this.reset}  midiEvent={this.state.midiEvent}/>
+                    <EventRecorder  participantID={this.state.participantID} scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} loopLength={this.state.loopLength} reset={this.reset} midiEvent={this.state.midiEvent}/>
                     {console.log("pass")}
                 </div>
             </div>

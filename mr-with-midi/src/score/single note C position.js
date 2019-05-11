@@ -25,7 +25,7 @@ export const singleNoteCPosition = [
     {score:"y1/2D2", imageSizeFactor:"1.6", staffWidth:"110", eventDuration:1000, eventName:"Test-7", eventID:7},
     {score:"", imageSizeFactor:"", staffWidth:"", eventDuration:2000, eventName: "blank screen", eventID:8},
     {score:"y1/2F2", imageSizeFactor:"1.6", staffWidth:"110", eventDuration:1000, eventName:"Test-8", eventID:8},
-    {score:"", imageSizeFactor:"", staffWidth:"", eventDuration:2000, eventName: "blank screen", eventID:8},
+    {score:"", imageSizeFactor:"", staffWidth:"", eventDuration:2000, eventName: "blank screen", eventID:9},
     {score:-1, eventID:-99},//This marks the end
 ];
 

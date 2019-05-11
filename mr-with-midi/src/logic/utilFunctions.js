@@ -23,12 +23,15 @@ const calculate =(eventID,playTimes,playedNotesArray,noteGroupFormatVariant,part
     let iniTime = '';
     let caseNumber = 'please check manually';
     let case2additional = '';
+    let idealNoteCounts = noteGroupFormatVariant[eventID].length/3;
+
+    console.log(idealNoteCounts);
 
     if (playedNotesArray[eventID].indexOf(noteGroupFormatVariant[eventID]) === 0 )
     {
         caseNumber = '1';
-        compTime = playTimes[eventID][1] - playTimes[eventID][0];
-        //[eventID][0]is image time.  [eventID][3] is the last correct note in a 2 notes trial, for case 1
+        compTime = playTimes[eventID][idealNoteCounts] - playTimes[eventID][0];
+        //[eventID][0]is image time.  [eventID][ideaNoteCount] is the last correct note in a x notes trial, for case 1. Where: x is the count of designed notes in a single round
         iniTime = playTimes[eventID][1] - playTimes[eventID][0];
         //[eventID][0]is image time.  [eventID][1] is the first correct note in a 2 notes trial, for case 1
     }
@@ -36,9 +39,12 @@ const calculate =(eventID,playTimes,playedNotesArray,noteGroupFormatVariant,part
     {
         caseNumber = '2';
         case2additional = (playedNotesArray[eventID].indexOf(noteGroupFormatVariant[eventID]))/3;
-        let last = playTimes[eventID];
-        compTime = playTimes[eventID][case2additional+1] - playTimes[eventID][0];
+        compTime = playTimes[eventID][case2additional+idealNoteCounts] - playTimes[eventID][0];
         iniTime = playTimes[eventID][case2additional+1] - playTimes[eventID][0];
+
+
+
+
 
     }
     else
@@ -48,9 +54,5 @@ const calculate =(eventID,playTimes,playedNotesArray,noteGroupFormatVariant,part
 
 };
 
-const csvConstant = [
-    ['Event ID and name: ' ,'Behavior Name: ','Played Note: ','Velocity: ','Time(ms): ','Date: ','Participant ID','Test name','Notes shown on screen','Played notes','Case number','If case 2 - how many additional notes','if case 1 or case 2 - completion time','if case 1 or case 2 - initial response time'],
-    []
-];
 
-export {saveCSV,calculate, csvConstant}
+export {saveCSV,calculate}
