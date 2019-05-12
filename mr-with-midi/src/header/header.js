@@ -24,7 +24,9 @@ export default class Header extends React.Component {
             scoreSet:[],
             midiEvent:0,
             participantID:'',
-            inputValue: ''
+            inputValue: '',
+            showing:true,
+            hoverShow: false,
         };
     }
 
@@ -151,10 +153,6 @@ export default class Header extends React.Component {
             participantID:evt.target.value
         });
     }
-    handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.value);
-        event.preventDefault();
-    }
 
     componentDidMount() {
         window.addEventListener('keydown', this.handleKeyDown);//global
@@ -164,8 +162,8 @@ export default class Header extends React.Component {
 
     render() {
         return (
-            <div>
-                <div>
+            <div >
+                <div style={{ opacity: (this.state.hoverShow ? '1' : '0') }} onMouseEnter={() => this.setState({ hoverShow: true }) } onMouseLeave={() => this.setState({ hoverShow: false }) }>
                     <Button color="success" id="startNew" onClick={this.handleMouseDown}>New Participant</Button>
                     &nbsp;
                     <Button color="primary" id={intervalCPositionBroken[0]["scoreIDformatted"]} onClick={this.handleMouseDown}>{intervalCPositionBroken[0]["scoreID"]}</Button>
@@ -175,22 +173,24 @@ export default class Header extends React.Component {
                     <Button color="primary" id={singleNoteGPosition[0]["scoreIDformatted"]} onClick={this.handleMouseDown}>{singleNoteGPosition[0]["scoreID"]}</Button>
                     &nbsp;
                     <Button color="secondary" id="resetCurrent" onClick={this.handleMouseDown}>Reset Current</Button>
+                    <br />
+                    <div>Current Participant: {this.state.inputValue}</div>
                 </div>
 
-                <div>Current Participant: {this.state.inputValue}</div>
-
-                <form onSubmit={this.handleSubmit}>
+                <form style={{ display: (this.state.showing ? 'block' : 'none') }}>
                     <label>
-                        Name:
+
                         <input type="text" value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)} />
                     </label>
-                    <input type="submit" value="Submit" />
+
                 </form>
+                <button style={{ display: (this.state.showing ? 'block' : 'none') }} onClick={() => this.setState({ showing: false })}>Submit</button>
+
 
 
                 <div>
-                    <CreateScoreWithBlanksLC participantID={this.state.participantID} scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} loopLength={this.state.loopLength} reset={this.reset}  midiEvent={this.state.midiEvent}/>
-                    <EventRecorder  participantID={this.state.participantID} scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} loopLength={this.state.loopLength} reset={this.reset} midiEvent={this.state.midiEvent}/>
+                    <CreateScoreWithBlanksLC hoverShow={this.state.hoverShow} participantID={this.state.participantID} scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} loopLength={this.state.loopLength} reset={this.reset}  midiEvent={this.state.midiEvent}/>
+                    <EventRecorder hoverShow={this.state.hoverShow} participantID={this.state.participantID} scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} loopLength={this.state.loopLength} reset={this.reset} midiEvent={this.state.midiEvent}/>
                     {console.log("pass")}
                 </div>
             </div>

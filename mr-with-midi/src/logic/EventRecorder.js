@@ -133,7 +133,7 @@ export default class EventRecorder extends React.Component {
     };
 
     shouldComponentUpdate(nextProps) {
-        return (this.props.participantID === nextProps.participantID);
+        return ((this.props.participantID === nextProps.participantID) && (this.props.hoverShow === nextProps.hoverShow));
     }
 
 
