@@ -50,7 +50,7 @@ const calculate =(eventID,playTimes,playedNotesArray,noteGroupFormatVariant,part
     else
     {caseNumber = 'please check manually'}
 
-    return [eventID + 'Calculation','Calculate the result of previous trial','','','','','',scoreID,noteGroupFormatVariant[eventID],playedNotesArray[eventID],caseNumber,case2additional,compTime,iniTime];
+    return [eventID-1 + 'Calculation','Calculate the result of previous trial','','','','','',scoreID,noteGroupFormatVariant[eventID],playedNotesArray[eventID],caseNumber,case2additional,compTime,iniTime];
 
 };
 

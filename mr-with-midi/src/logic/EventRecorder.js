@@ -9,8 +9,8 @@ export default class EventRecorder extends React.Component {
 
         this.timeoutID = [];
         this.eventID=0;
-        this.playTimes=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]];
-        this.playedNotesArray=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],];
+        this.playTimes=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]];
+        this.playedNotesArray=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],,[],[],[],[],[],[]];
 
         this.notes= ["C1=", "C1#", "D1=", "D1#", "E1=", "F1=", "F1#", "G1=", "G1#", "A1=", "A1#", "B1=",
             "C2=", "C2#", "D2=", "D2#", "E2=", "F2=", "F2#", "G2=", "G2#", "A2=", "A2#", "B2=",
@@ -41,6 +41,8 @@ export default class EventRecorder extends React.Component {
     };
 
     clearCSV =() => {
+        this.playTimes=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]];
+        this.playedNotesArray=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],];
 
         this.setState({
             csvData:[
@@ -76,9 +78,9 @@ export default class EventRecorder extends React.Component {
                 }
 
                 this.eventID = scoreSet[i]["eventID"];
-                this.playTimes[this.eventID][0] = performance.now();
+                this.playTimes[this.eventID][0] = performance.now()-scoreSet[i]["eventDuration"];
                 let tempArr= this.state.csvData;
-                tempArr.push([scoreSet[i]["eventName"],scoreSet[i]["score"],"",,performance.now().toString(),Date(),participantID,scoreSet[0]["scoreID"]]);
+                tempArr.push([scoreSet[i]["eventName"],scoreSet[i]["score"],"","",performance.now().toString(),Date(),participantID,scoreSet[0]["scoreID"]]);
                 this.setState({//update state that depends on previous state
                     csvData:tempArr,
                 });
@@ -89,8 +91,6 @@ export default class EventRecorder extends React.Component {
                         return null;
                     },500);
                 }
-
-
 
             },accum+=scoreSet[i]["eventDuration"]);
         }
