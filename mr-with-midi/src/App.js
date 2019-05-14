@@ -25,3 +25,4 @@ class App extends Component {
 }
 
 export default App;
+//https://electronjs.org/docs/tutorial/application-packaging#adding-unpacked-files-in-asar-archive

@@ -6,11 +6,10 @@ export default class EventRecorder extends React.Component {
     constructor(props) {
         super(props);
 
-
         this.timeoutID = [];
         this.eventID=0;
-        this.playTimes=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]];
-        this.playedNotesArray=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],,[],[],[],[],[],[]];
+        this.playTimes=[[]];
+        this.playedNotesArray=[[]];
 
         this.notes= ["C1=", "C1#", "D1=", "D1#", "E1=", "F1=", "F1#", "G1=", "G1#", "A1=", "A1#", "B1=",
             "C2=", "C2#", "D2=", "D2#", "E2=", "F2=", "F2#", "G2=", "G2#", "A2=", "A2#", "B2=",
@@ -33,6 +32,16 @@ export default class EventRecorder extends React.Component {
 
     }
 
+    initPlayeTimeAndNotesArray = (length) => {
+      for (let i=0;i<length+10;i++) {
+          this.playTimes.push([]);
+          this.playedNotesArray.push([]);
+          console.log(this.playedNotesArray)
+      }
+
+    };
+
+
     clearAsyncFunctions= () =>{
         let index = this.timeoutID.length;
         while (index--) {
@@ -41,9 +50,9 @@ export default class EventRecorder extends React.Component {
     };
 
     clearCSV =() => {
-        this.playTimes=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]];
-        this.playedNotesArray=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],];
 
+        this.playTimes=[[]];
+        this.playedNotesArray=[[]];
         this.setState({
             csvData:[
                 ['Event ID and name: ' ,'Behavior Name: ','Played Note: ','Velocity: ','Time(ms): ','Date: ','Participant ID','Test name','Notes shown on screen','Played notes','Case number','If case 2 - how many additional notes','if case 1 or case 2 - completion time','if case 1 or case 2 - initial response time'],
@@ -144,6 +153,7 @@ export default class EventRecorder extends React.Component {
                 this.clearAsyncFunctions();
                 this.clearCSV();
             } else { //record
+                this.initPlayeTimeAndNotesArray(this.props.scoreSet.length);
                 this.recordData(this.props.participantID, this.props.scoreSet, this.props.ptKeyName, this.props.loopLocation, this.props.loopLength, this.props.midiEvent)
             }
         }

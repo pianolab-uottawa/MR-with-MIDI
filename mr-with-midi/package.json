@@ -12,19 +12,28 @@
     "bootstrap": "^4.3.1",
     "electron-is-dev": "^0.3.0",
     "electron-publisher-s3": "^20.17.2",
+    "fsevents": "^2.0.6",
+    "jquery": "^3.4.1",
     "react": "^16.8.4",
     "react-dev-utils": "^7.0.3",
     "react-dom": "^16.8.4",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.5",
-    "reactstrap": "^7.1.0"
+    "reactstrap": "^7.1.0",
+    "typescript": "^3.4.5"
   },
   "scripts": {
     "dev": "yarn react-scripts start",
     "build": "react-scripts build",
     "start": "concurrently \"cross-env BROWSER=none yarn react-scripts start\" \"wait-on http://localhost:3000 && electron .\"",
     "pack": "electron-builder --dir",
-    "dist": "npx build --x64 --macos --win --linux --c.extraMetadata.main=build/electron.js -p always"
+    "dist": "electron-builder"
   },
+  "files": [
+    "*.js",
+    "build",
+    "node_modules"
+  ],
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -35,19 +44,20 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "electron": "^4.0.6",
-    "react-scripts": "2.1.5",
     "concurrently": "^3.6.0",
     "cross-env": "^5.2.0",
-    "electron-builder": "^20.18.0",
+    "electron": "^4.0.6",
+    "electron-builder": "^20.40.2",
+    "electron-devtools-installer": "^2.2.4",
+    "react-scripts": "2.1.5",
     "version-bump-prompt": "^4.1.0",
-    "wait-on": "^3.2.0",
-    "electron-devtools-installer": "^2.2.4"
+    "wait-on": "^3.2.0"
   },
   "build": {
-    "appId": "com.your-domain",
+    "extends": null,
+    "appId": "com.pianolab.uottawa",
     "compression": "normal",
-    "productName": "Example",
+    "productName": "Music Reading",
     "directories": {
       "buildResources": "build",
       "output": "dist"
