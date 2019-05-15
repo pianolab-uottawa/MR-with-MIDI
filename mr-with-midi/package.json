@@ -1,8 +1,9 @@
 {
   "name": "mr-with-midi",
   "version": "0.1.0",
-  "private": false,
-  "main": "public/electron.js",
+  "homepage":  "./",
+  "private": true,
+  "main": "build/electron.js",
   "keywords": [
     "React",
     "Electron"
@@ -10,20 +11,25 @@
   "dependencies": {
     "abcjs": "^5.6.7",
     "bootstrap": "^4.3.1",
+    "builder": "^4.0.0",
     "electron-is-dev": "^0.3.0",
     "electron-publisher-s3": "^20.17.2",
+    "jquery": "^3.4.1",
     "react": "^16.8.4",
     "react-dev-utils": "^7.0.3",
     "react-dom": "^16.8.4",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.5",
-    "reactstrap": "^7.1.0"
+    "reactstrap": "^7.1.0",
+    "typescript": "^3.4.5"
   },
   "scripts": {
+    "electron": "electron src",
     "dev": "yarn react-scripts start",
     "build": "react-scripts build",
     "start": "concurrently \"cross-env BROWSER=none yarn react-scripts start\" \"wait-on http://localhost:3000 && electron .\"",
     "pack": "electron-builder --dir",
-    "dist": "npx build --x64 --macos --win --linux --c.extraMetadata.main=build/electron.js -p always"
+    "dist": "electron-builder"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,21 +41,26 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "electron": "^4.0.6",
-    "react-scripts": "2.1.5",
     "concurrently": "^3.6.0",
     "cross-env": "^5.2.0",
-    "electron-builder": "^20.18.0",
+    "electron": "^5.0.1",
+    "electron-builder": "^20.40.2",
+    "electron-devtools-installer": "^2.2.4",
+    "react-scripts": "2.1.5",
     "version-bump-prompt": "^4.1.0",
-    "wait-on": "^3.2.0",
-    "electron-devtools-installer": "^2.2.4"
+    "wait-on": "^3.2.0"
   },
   "build": {
-    "appId": "com.your-domain",
+    "extends": null,
+    "appId": "com.pianolab.uottawa",
+    "files": [
+      "./build/",
+      "./package.json"
+    ],
     "compression": "normal",
-    "productName": "Example",
+    "productName": "Music Reading",
     "directories": {
-      "buildResources": "build",
+      "buildResources": "public",
       "output": "dist"
     },
     "mac": {
