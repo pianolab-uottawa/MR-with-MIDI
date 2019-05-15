@@ -7,17 +7,13 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            isShow: true,
-        };
     }
   render() {
     return (
       <div className="App">
 
-
-          {this.state.isShow ? <Header /> : null}
-          {this.state.isShow ? <Body /> : null}
+          <Header />
+          <Body />
 
       </div>
     );

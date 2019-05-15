@@ -177,22 +177,25 @@ export default class Header extends React.Component {
                     <div>Current Participant: {this.state.inputValue}</div>
                 </div>
 
-                <form style={{ display: (this.state.showing ? 'block' : 'none') }}>
-                    <label>
-
-                        <input type="text" value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)} />
-                    </label>
-
-                </form>
-                <button style={{ display: (this.state.showing ? 'block' : 'none') }} onClick={() => this.setState({ showing: false })}>Submit</button>
-
-
-
                 <div>
                     <CreateScoreWithBlanksLC hoverShow={this.state.hoverShow} participantID={this.state.participantID} scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} loopLength={this.state.loopLength} reset={this.reset}  midiEvent={this.state.midiEvent}/>
                     <EventRecorder hoverShow={this.state.hoverShow} participantID={this.state.participantID} scoreSet={this.state.scoreSet} ptKeyName={this.state.ptKeyName} loopLocation={this.state.loopLocation} loopLength={this.state.loopLength} reset={this.reset} midiEvent={this.state.midiEvent}/>
                     {console.log("pass")}
                 </div>
+
+                <div style={{textAlign:'center'}}>
+
+                <form style={{ display: (this.state.showing ? 'block' : 'none') }}>
+                    <label>
+                        Please enter participant ID:<br />
+                        <input type="text" value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)} />
+                    </label>
+
+                </form>
+
+                <Button color="primary" style={{ display: (this.state.showing ? 'block' : 'none'),margin:'auto' }} onClick={() => this.setState({ showing: false })}>Submit</Button>
+                </div>
+
             </div>
         )
     }
