@@ -12,7 +12,6 @@
     "abcjs": "^5.6.7",
     "bootstrap": "^4.3.1",
     "builder": "^4.0.0",
-    "electron-is-dev": "^0.3.0",
     "jquery": "^3.4.1",
     "react": "^16.8.4",
     "react-dev-utils": "^7.0.3",
@@ -52,8 +51,7 @@
     "extends": null,
     "appId": "com.pianolab.uottawa",
     "files": [
-      "./build/",
-      "./package.json"
+      "./build/"
     ],
     "compression": "normal",
     "productName": "Music Reading",
@@ -73,7 +71,7 @@
     },
     "win": {
       "target": "nsis",
-      "icon": "assets/icon.ico",
+      "icon": "assets/icon.ico"
     }
   }
 }
