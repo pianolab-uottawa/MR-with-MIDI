@@ -12,6 +12,9 @@ Electron
 Electron builder
 
 <h3>Usage:</h3>
+
 Edit <code>build:</code> from package.json to configure distribution options.
+
 Run <code>yarn build</code> to build from source.
+
 Run <code>yarn dist</code> to generate distribution binaries.
