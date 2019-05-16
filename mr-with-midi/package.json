@@ -1,7 +1,7 @@
 {
   "name": "mr-with-midi",
   "version": "0.1.0",
-  "homepage":  "./",
+  "homepage": "./",
   "private": true,
   "main": "build/electron.js",
   "keywords": [
@@ -13,12 +13,10 @@
     "bootstrap": "^4.3.1",
     "builder": "^4.0.0",
     "electron-is-dev": "^0.3.0",
-    "electron-publisher-s3": "^20.17.2",
     "jquery": "^3.4.1",
     "react": "^16.8.4",
     "react-dev-utils": "^7.0.3",
     "react-dom": "^16.8.4",
-    "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.5",
     "reactstrap": "^7.1.0",
     "typescript": "^3.4.5"

@@ -25,8 +25,6 @@ createWindow = () => {
             : `file://${path.join(__dirname, '../build/index.html')}`,
     );
 
-    mainWindow.webContents.openDevTools();
-
     if (isDev) {
         const {
             default: installExtension,
