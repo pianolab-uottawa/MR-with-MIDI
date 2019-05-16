@@ -1,9 +1,9 @@
 # MR-with-MIDI
-Work in progress.
+Work in progress
 
 See score on the screen, play with your MIDI keyboard, record MIDI raw data and get your music reading result from the data.
 
-<h3>Requirement: </h3>
+<h3>Requirement:</h3>
 abcjs
 Electron
 Electron builder
