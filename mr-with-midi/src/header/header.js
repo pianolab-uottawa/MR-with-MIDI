@@ -77,6 +77,11 @@ export default class Header extends React.Component {
                 this.scoreSetTemp = intervalCPositionBroken;
                 break;
 
+            case "submitID":
+
+
+                break;
+
             case "startNew":
                 window.location.reload();
 
@@ -111,7 +116,15 @@ export default class Header extends React.Component {
     };
 
     handleKeyDown = (event) => {
+
         this.reset=false;
+
+        if (event.target.id === "eee" && event.key==="Enter") {
+            event.preventDefault();
+            this.setState({ showing: false });
+        }
+
+
         for (let i=0;i<this.scoreSetTemp.length;i++)
         {
             if ((this.scoreSetTemp[i]["ptKeyName"] === event.key) && (!this.keyLock)){
@@ -172,7 +185,7 @@ export default class Header extends React.Component {
                     &nbsp;
                     <Button color="primary" id={singleNoteGPosition[0]["scoreIDformatted"]} onClick={this.handleMouseDown}>{singleNoteGPosition[0]["scoreID"]}</Button>
                     &nbsp;
-                    <Button color="secondary" id="resetCurrent" onClick={this.handleMouseDown}>Reset Current</Button>
+                    <Button color="secondary" id="resetCurrent" onClick={this.handleMouseDown}>Reset Current Round</Button>
                     <br />
                     <div>Current Participant: {this.state.inputValue}</div>
                 </div>
@@ -183,17 +196,24 @@ export default class Header extends React.Component {
                     {console.log("pass")}
                 </div>
 
-                <div style={{textAlign:'center'}}>
+                <div style={{textAlign:'center', marginTop:'-25%',paddingTop:'25%', zIndex:'5', position:'relative', display: (this.state.showing ? 'block' : 'none')}} >
 
-                <form style={{ display: (this.state.showing ? 'block' : 'none') }}>
+                 <form>
                     <label>
                         Please enter participant ID:<br />
-                        <input type="text" value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)} />
+                        <input id="eee" type="text" value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)} />
                     </label>
 
-                </form>
+                 </form>
 
-                <Button color="primary" style={{ display: (this.state.showing ? 'block' : 'none'),margin:'auto' }} onClick={() => this.setState({ showing: false })}>Submit</Button>
+                 <Button
+                    id="submitID"
+                    color="primary"
+                    style={{ margin:'auto' }}
+                    onClick={() => this.setState({ showing: false })}
+                 >
+                    Submit
+                 </Button>
                 </div>
 
             </div>

@@ -78,7 +78,7 @@ class CreateScoreWithBlanksLC extends React.Component {
                 this.clearAsyncFunctions();
             }
             else if (this.props.midiEvent !== 0){
-                //do nothing. It's used to prevent this component re-render itself on parent midiEvent state change
+                //do nothing. It's used to prevent this component re-render itself on parent midiEvent state change, this should be moved under shouldComponentUpdate
                 console.log("midi, no re-rendering")
             }
             else {

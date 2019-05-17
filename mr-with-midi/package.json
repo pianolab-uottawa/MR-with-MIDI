@@ -11,10 +11,9 @@
   "dependencies": {
     "abcjs": "^5.6.7",
     "bootstrap": "^4.3.1",
-    "builder": "^4.0.0",
+    "electron-is-dev": "^1.1.0",
     "jquery": "^3.4.1",
     "react": "^16.8.4",
-    "react-dev-utils": "^7.0.3",
     "react-dom": "^16.8.4",
     "react-scripts": "2.1.5",
     "reactstrap": "^7.1.0",
@@ -38,6 +37,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "builder": "^4.0.0",
     "concurrently": "^3.6.0",
     "cross-env": "^5.2.0",
     "electron": "^5.0.1",
@@ -51,7 +51,8 @@
     "extends": null,
     "appId": "com.pianolab.uottawa",
     "files": [
-      "./build/"
+      "./build/",
+      "./package.json"
     ],
     "compression": "normal",
     "productName": "Music Reading",
@@ -60,7 +61,7 @@
       "output": "dist"
     },
     "mac": {
-      "icon": "assets/icon.icns",
+      "icon": "build/icon.png",
       "type": "distribution",
       "target": [
         "pkg",
@@ -71,7 +72,7 @@
     },
     "win": {
       "target": "nsis",
-      "icon": "assets/icon.ico"
+      "icon": "build/icon.png"
     }
   }
 }
