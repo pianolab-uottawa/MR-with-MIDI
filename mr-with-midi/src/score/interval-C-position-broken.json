@@ -1,0 +1,89 @@
+{
+  "name":"interval-C-position-broken",
+  "nameFormatted": "intervalCPositionBroken",
+  "type":"Score Parameter Object",
+  "sessions":{
+    "1":{
+      "sessionName": "practice-1",
+      "buttonToStartSession": "1",
+      "scoreDisplayEvents": {
+        "1":{
+          "eventName": "blank screen",
+          "eventDuration": "1000",
+          "score": "",
+          "imageSizeFactor": "",
+          "staffWidth": ""
+        },
+        "2": {
+          "eventName": "practice 1 shows on screen",
+          "eventDuration": "300",
+          "score": " G G G|",
+          "imageSizeFactor": "1.2",
+          "staffWidth": "60"
+        }
+      }
+    },
+    "2":{
+      "sessionName": "practice-2, or test, or whatever name",
+      "buttonToStartSession": "2",
+      "scoreDisplayEvents": {
+        "1":{
+          "eventName": "blank screen",
+          "eventDuration": "1000",
+          "score": "",
+          "imageSizeFactor": "",
+          "staffWidth": ""
+        },
+        "2": {
+          "eventName": "test 1 shows on screen",
+          "eventDuration": "300",
+          "score": " G G G|",
+          "imageSizeFactor": "1.2",
+          "staffWidth": "60"
+        },
+        "3":{
+          "eventName": "blank screen",
+          "eventDuration": "1000",
+          "score": "",
+          "imageSizeFactor": "",
+          "staffWidth": ""
+        },
+        "4": {
+          "eventName": "test 2",
+          "eventDuration": "300",
+          "score": "y1/2d2",
+          "imageSizeFactor": "1.2",
+          "staffWidth": "60"
+        },
+        "5":{
+          "eventName": "blank screen",
+          "eventDuration": "1000",
+          "score": "",
+          "imageSizeFactor": "",
+          "staffWidth": ""
+        },
+        "6": {
+          "eventName": "test 1 shows on screen",
+          "eventDuration": "300",
+          "score": "y1/2E2",
+          "imageSizeFactor": "1.2",
+          "staffWidth": "60"
+        },
+        "7":{
+          "eventName": "blank screen",
+          "eventDuration": "1000",
+          "score": "",
+          "imageSizeFactor": "",
+          "staffWidth": ""
+        },
+        "8": {
+          "eventName": "test 2",
+          "eventDuration": "300",
+          "score": " G G G|",
+          "imageSizeFactor": "1.2",
+          "staffWidth": "60"
+        }
+      }
+    }
+  }
+}
