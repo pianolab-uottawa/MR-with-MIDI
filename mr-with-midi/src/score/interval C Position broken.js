@@ -21,3 +21,4 @@ export const intervalCPositionBroken = [
 export default {
     intervalCPositionBroken,
 }
+

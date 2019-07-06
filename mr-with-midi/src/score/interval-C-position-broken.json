@@ -1,0 +1,89 @@
+{
+  "name":"interval-C-position-broken",
+  "nameFormatted": "intervalCPositionBroken",
+  "type":"Score Parameter Object",
+  "sessions":{
+    "0":{
+      "sessionName": "practice-1",
+      "buttonToStartSession": "1",
+      "scoreDisplayEvents": {
+        "0":{
+          "eventName": "blank screen",
+          "eventDuration": "1000",
+          "score": "",
+          "imageSizeFactor": "",
+          "staffWidth": ""
+        },
+        "1": {
+          "eventName": "practice 1 shows on screen",
+          "eventDuration": "300",
+          "score": " G G G|",
+          "imageSizeFactor": "1.2",
+          "staffWidth": "60"
+        }
+      }
+    },
+    "1":{
+      "sessionName": "practice-2, or test, or whatever name",
+      "buttonToStartSession": "2",
+      "scoreDisplayEvents": {
+        "0":{
+          "eventName": "blank screen",
+          "eventDuration": "1000",
+          "score": "",
+          "imageSizeFactor": "",
+          "staffWidth": ""
+        },
+        "1": {
+          "eventName": "test 1 shows on screen",
+          "eventDuration": "300",
+          "score": " G G G|",
+          "imageSizeFactor": "1.2",
+          "staffWidth": "60"
+        },
+        "2":{
+          "eventName": "blank screen",
+          "eventDuration": "1000",
+          "score": "",
+          "imageSizeFactor": "",
+          "staffWidth": ""
+        },
+        "3": {
+          "eventName": "test 2",
+          "eventDuration": "300",
+          "score": "y1/2d2",
+          "imageSizeFactor": "1.2",
+          "staffWidth": "60"
+        },
+        "4":{
+          "eventName": "blank screen",
+          "eventDuration": "1000",
+          "score": "",
+          "imageSizeFactor": "",
+          "staffWidth": ""
+        },
+        "5": {
+          "eventName": "test 3",
+          "eventDuration": "300",
+          "score": "y1/2E2",
+          "imageSizeFactor": "1.2",
+          "staffWidth": "60"
+        },
+        "6":{
+          "eventName": "blank screen",
+          "eventDuration": "1000",
+          "score": "",
+          "imageSizeFactor": "",
+          "staffWidth": ""
+        },
+        "7": {
+          "eventName": "test 4",
+          "eventDuration": "300",
+          "score": " G G G|",
+          "imageSizeFactor": "1.2",
+          "staffWidth": "60"
+        }
+      }
+    }
+  }
+}
