@@ -16,7 +16,7 @@
     "electron-publisher-s3": "^20.17.2",
     "jquery": "^3.4.1",
     "react": "^16.8.4",
-    "react-dev-utils": "^7.0.3",
+    "react-dev-utils": "^11.0.4",
     "react-dom": "^16.8.4",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.5",
